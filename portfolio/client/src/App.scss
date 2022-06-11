@@ -1,0 +1,251 @@
+$black: #000;
+$white: #fff;
+$primary: #bb2a2a;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif; 
+}
+
+.App {
+  background-color: #f2f2f2;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/assets/mainbg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-color: #cccccc;
+  height: calc(100vh - 50px);
+  color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  word-wrap: break-word;
+  h1 {
+    font-size: 150px;
+    letter-spacing: .5em;
+  }
+}
+
+nav {
+  height: 50px;
+  background-color: $white;
+  position: sticky;
+  top: 1px; 
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+  height: 100%;
+  a {
+    border: none;
+    color: $black;
+    text-decoration: none;
+    margin: 0 40px;
+  }
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: #bb2a2a;
+    text-underline-offset: .75em;
+    cursor: pointer;
+  }
+  .active {
+    text-decoration: underline;
+    text-decoration-color: #bb2a2a;
+    text-underline-offset: .75em;
+  }
+}
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+}
+
+.aboutleft {
+  background-color: $white;
+  padding: 10px 20px;
+  flex: 1;
+  h2 {
+    font-size: 40px;
+  }
+}
+
+.aboutright {
+  background-image: url(./assets/me.jpg);
+  background-position: center;
+  background-size: cover;
+  flex: 1;
+  width: 100%;
+}
+
+.projects {
+  background-color: $white;
+  padding: 20px;
+  margin: 0px 20px;
+  h2 {
+    font-size: 40px;
+  }
+}
+
+.projectmain {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.projectlist {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.project {
+  height: 325px;
+  width: 400px;
+  margin: 20px 20px 0px 20px;
+  text-align: center;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  #thumb {
+    width: 400px;
+    height: 225px;
+  }
+  img {
+    height: 25px;
+    width: 25px;
+  }
+}
+
+.contact { 
+  background-color: $white;
+  padding: 20px;
+  margin: 0px 20px;
+  h2 {
+    font-size: 40px;
+  }
+}
+.emailform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  input[type=text], input[type=email], textarea {
+    outline: none;
+    border: 1px solid black;
+    border-color: $black; 
+    margin-bottom: 10px;
+    width: 350px;
+    height: 30px;
+    text-indent: 10px;
+  }
+  textarea {
+    height: 175px;
+    // resize: none;
+  }
+}
+  
+.footer {
+  height: 275px;
+  background-color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  p {
+    position: absolute;
+    bottom: 40px;
+  }
+}
+
+svg {
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+.sociallinks {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 70px;
+  img {
+    margin: 0 20px;
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  nav {
+    width: 100%;
+  }
+  .middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/assets/mainbg.jpg");
+    background-position: center;
+    background-size: cover;
+    background-color: #cccccc;
+    height: calc(100vh - 50px);
+    color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    font-size: medium;
+    h1 {
+      letter-spacing: .5em;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+  }
+  .aboutright {
+    display: none;
+  }
+  .emailform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    input[type=text], input[type=email], textarea {
+      outline: none;
+      border: 1px solid black;
+      border-color: $black; 
+      margin-bottom: 10px;
+      width: 100%;
+      height: 30px;
+      text-indent: 10px;
+    }
+    textarea {
+      height: 175px;
+      // resize: none;
+    }
+  }
+  .project {
+    height: 300px;
+    width: 400px;
+    margin: 20px 20px 0px 20px;
+    text-align: center;
+    #thumb {
+      width: 100%;
+      height: 175px;
+    }
+    img {
+      height: 25px;
+      width: 25px;
+    }
+  }
+}
