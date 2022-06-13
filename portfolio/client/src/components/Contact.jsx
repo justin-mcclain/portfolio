@@ -27,13 +27,13 @@ export const ContactUs = () => {
     return (
         <>
             <div className="contact" id="contact">
-                <h2>CONTACT ME</h2>
+                <h2 className="headertext">CONTACT ME</h2>
                 <form ref={form} onSubmit={sendEmail}>
                     <div className="emailform">
                         <input type="text" name="user_name" placeholder="Name" />
                         <input type="email" name="user_email" placeholder="Email" />
                         <textarea name="message" placeholder="Message"/>
-                        <input type="submit" value="Send" />
+                        <input type="submit" value="Send" className="subbutton" />
                     </div>
                 </form>
             </div>

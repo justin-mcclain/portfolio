@@ -4,10 +4,13 @@ import {
 } from "react-scroll";
 
 const NavBar = () => {
+    var Scroll = require('react-scroll');
+    var scroll = Scroll.animateScroll;
     return (
         <nav id="navbar">
             <div className="links">
                 <Link
+                    onClick={scroll.scrollToTop}
                     spy={true}
                     smooth={true}
                     offset={-50}
