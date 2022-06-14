@@ -1,16 +1,16 @@
 import React from "react";
-import {
-    Link
-} from "react-scroll";
+import { Link } from "react-scroll";
 
 const NavBar = () => {
-    var Scroll = require('react-scroll');
+    var Scroll = require("react-scroll");
     var scroll = Scroll.animateScroll;
     return (
         <nav id="navbar">
             <div className="links">
                 <Link
+                    activeClass="active"
                     onClick={scroll.scrollToTop}
+                    to="/"
                     // spy={true}
                     smooth={true}
                     offset={-50}

@@ -4,7 +4,7 @@ import githubLogo from "../assets/github.png"
 function Projects() {
     return (
         <>
-            <div className="projects" id="projects">
+            <div className="projects">
                 <div className="projectheader">
                     <h2 className="headertext">PROJECTS</h2>
                 </div>

@@ -59,7 +59,7 @@ const ContactUs = () => {
 
     return (
         <>
-            <div className="contact" id="contact">
+            <div className="contact">
                 <ToastContainer />
                 <h2 className="headertext">CONTACT ME</h2>
                 <form ref={form} onSubmit={sendEmail}>

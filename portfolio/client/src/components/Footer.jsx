@@ -13,7 +13,7 @@ function Footer() {
                     width="100%"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="svgcolor-light"
+                    className="svgcolor-light"
                 >
                     <path
                         d="M0 0 L50 100 L100 0 Z"
