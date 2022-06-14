@@ -5,6 +5,7 @@ import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Contact from './components/Contact'
 import {BrowserRouter} from 'react-router-dom'
+import React from 'react';
 
 function App() {
   return (

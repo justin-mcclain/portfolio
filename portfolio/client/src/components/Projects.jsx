@@ -1,5 +1,4 @@
 import React from "react";
-import finance from "../assets/finance.png"
 import githubLogo from "../assets/github.png"
 
 function Projects() {
@@ -12,7 +11,7 @@ function Projects() {
                 <div className="projectmain">
                     <div className="projectlist">
                         <div className="project">
-                            <img src={finance} alt="Finance Project Thumbnail" id="thumb"/>
+                            <div className="thumb"></div>
                             <div className="projecttext">
                                 <h3>Finance Tracker</h3>
                                 <p>Languages used: HTML, CSS, React.js</p>
@@ -23,7 +22,6 @@ function Projects() {
                     </div>
                 </div>
             </div>
-            <br />
         </>
     );
 }

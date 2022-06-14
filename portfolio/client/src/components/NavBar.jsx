@@ -11,7 +11,7 @@ const NavBar = () => {
             <div className="links">
                 <Link
                     onClick={scroll.scrollToTop}
-                    spy={true}
+                    // spy={true}
                     smooth={true}
                     offset={-50}
                     duration={500}
@@ -21,7 +21,7 @@ const NavBar = () => {
                 <Link
                     activeClass="active"
                     to="about"
-                    spy={true}
+                    // spy={true}
                     smooth={true}
                     offset={-50}
                     duration={500}
@@ -31,7 +31,7 @@ const NavBar = () => {
                 <Link
                     activeClass="active"
                     to="projects"
-                    spy={true}
+                    // spy={true}
                     smooth={true}
                     offset={-50}
                     duration={500}
@@ -41,7 +41,7 @@ const NavBar = () => {
                 <Link
                     activeClass="active"
                     to="contact"
-                    spy={true}
+                    // spy={true}
                     smooth={true}
                     offset={-50}
                     duration={500}

@@ -6,7 +6,16 @@ function About() {
             <div className="about" id="about">
                 <div className="aboutleft">
                     <h2 className="headertext">ABOUT ME</h2>
-                    <p>This is where I breifly talk about myself.  I'm going to type nonsense until then because I don't know what I want to write here at the moment.  I have a cat named Zoball and she's the best kitty cat to ever live.</p>
+                    <div className="aboutleftcontent">
+                        <h4>Front-End:</h4>
+                        <p>HTML, CSS, SCSS, React.js, Express, Bootstrap, Material UI, Tailwind</p>
+                        <br />
+                        <h4>Back-End:</h4>
+                        <p>MongoDB, MySQL, Mongoose</p>
+                        <br />
+                        <h4>Other:</h4>
+                        <p>Javscript, C#, Python, ASP.NET Core, Entity Framework, Flask, Jinja2, Postman, MySQL Workbench, GitHub</p>
+                    </div>
                 </div>
                 <div className="aboutright">
                 </div>
