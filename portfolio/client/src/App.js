@@ -16,9 +16,11 @@ function App() {
           <h1>JUSTIN</h1>
           <h1>MCCLAIN</h1>
         </div>
-        <About/>
-        <Projects/>
-        <Contact/>
+        <div className="container">
+          <About/>
+          <Projects/>
+          <Contact/>
+        </div>
         <Footer />
       </div>
     </BrowserRouter>

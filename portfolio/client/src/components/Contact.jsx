@@ -60,7 +60,7 @@ const ContactUs = () => {
     return (
         <>
             <div className="contact">
-                <ToastContainer />
+                <ToastContainer/>
                 <h2 className="headertext">CONTACT ME</h2>
                 <form ref={form} onSubmit={sendEmail}>
                     <div className="emailform">

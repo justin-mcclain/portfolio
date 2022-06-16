@@ -37,7 +37,7 @@ function Footer() {
                         <img src={linkedinLogo} alt="" />
                     </a>
                 </div>
-                <p>© 2022 justinmcclain.net</p>
+                <p>justinmcclain.net © 2022</p>
             </div>
         </>
     );
