@@ -9,13 +9,13 @@ const Recent = () => {
 	useEffect(() => {
 		setTest([]);
 		if (JSON.parse(localStorage.getItem("rc")) !== null) {
-			JSON.parse(localStorage.getItem("rc")).map((city) => {
+			JSON.parse(localStorage.getItem("rc")).map((city, index) => {
 				axios
 					.get(
 						`http://api.openweathermap.org/geo/1.0/reverse?lat=${city.lat}&lon=${city.lon}&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
 					)
 					.then((res) => {
-                        setTest((test) => [...test, res.data[0]])
+						setTest((test) => [...test, { ...res.data[0], index }]);
 					});
 			});
 		}
@@ -24,20 +24,24 @@ const Recent = () => {
 	return (
 		<>
 			<div className="recents">
-				<p>Recent Cities: </p>
-				<ul>
-					{loaded
-						? test.map((rc, index) => {
-								return (
-									<li key={index}>
-										<Link to={`/weather/${rc.name}`}>
-											{rc.name},{rc.state}
-										</Link>
-									</li>
-								);
-						  })
-						: null}
-				</ul>
+				<div className="recentcities">
+                    <p>Recent Cities: </p>
+                    <ul>
+                        {loaded
+                            ? test
+                                    .sort((a, b) => a.index - b.index)
+                                    .map((rc, index) => {
+                                        return (
+                                            <Link to={`/weather/${rc.name}`} key={index}>
+                                                <li key={index}>
+                                                    {rc.name}, {rc.state}
+                                                </li>
+                                            </Link>
+                                        );
+                                    })
+                            : null}
+                    </ul>
+                </div>
 			</div>
 		</>
 	);

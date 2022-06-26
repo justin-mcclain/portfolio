@@ -41,7 +41,7 @@ const Weather = () => {
 			setMoreLoad(true);
 		};
 		city.length > 0 ? getWeather() : noZipWeather();
-	}, [checked]);
+	}, [checked, acity]);
 	return (
 		<>
 			{" "}

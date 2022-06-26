@@ -6,22 +6,33 @@ import { AppContext } from "../App";
 import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
-	const { setWeath, setChecked, setZip, zip, checked, setCity } =
+	const { setWeath, setChecked, setZip, zip, checked, setCity, test2, setTest2 } =
 		useContext(AppContext);
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 	const handleChange = (nextChecked) => {
 		setChecked(nextChecked);
-        if (localStorage.getItem("units") === true) {
-            localStorage.setItem("units", false)
-        } else {
-            localStorage.setItem("units", true)
-        }
+		const units = JSON.parse(localStorage.getItem("units"));
+		units.useFahrenheit = !units.useFahrenheit;
+		localStorage.setItem("units", JSON.stringify(units));
 	};
+	const hasLetters = /[a-z]/i;
 	const zipHandler = async (e, zip) => {
 		e.preventDefault();
+		const findDupe = (arr) => {
+			for (var i = 0; i < arr.length; i++) {
+				if (
+					arr[i].lat === zipResponse.data.lat &&
+					arr[i].lon === zipResponse.data.lon
+				) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
 		const zipResponse = await axios.get(
-			`http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-		);
+					`http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+			  );
 		const response = checked
 			? await axios.get(
 					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
@@ -29,105 +40,150 @@ const Navbar = () => {
 			: await axios.get(
 					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
 			  );
+        const hehe = await axios.get("https://api.openweathermap.org/geo/1.0/direct?q=Birmingham&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09")      
 		setCity(zipResponse.data);
 		setWeath(response.data);
+        setTest2(hehe.data);
 		if (localStorage.getItem("rc") === null) {
 			localStorage.setItem(
 				"rc",
 				JSON.stringify([
-					{ lat: zipResponse.data.lat, lon: zipResponse.data.lon },
+					{
+						lat: zipResponse.data.lat,
+						lon: zipResponse.data.lon,
+						zip: zip,
+					},
 				])
 			);
-		} else {
-			const prevRecent = JSON.parse(localStorage.getItem("rc"));
-			for (var i = 0; i < prevRecent.length; i++) {
+		} else if (
+			JSON.parse(localStorage.getItem("rc")).length > 6 &&
+			findDupe(JSON.parse(localStorage.getItem("rc"))) === true
+		) {
+			const tooLong = JSON.parse(localStorage.getItem("rc"));
+			for (var i = 0; i < tooLong.length; i++) {
 				if (
-					prevRecent[i].lat === zipResponse.data.lat &&
-					prevRecent[i].lon === zipResponse.data.lon
+					tooLong[i].lat === zipResponse.data.lat &&
+					tooLong[i].lon === zipResponse.data.lon
 				) {
-					prevRecent.splice(i, 1);
-                    i--
+					tooLong.splice(i, 1);
+					i--;
 				}
 			}
-            prevRecent.unshift({
-                lat: zipResponse.data.lat,
-                lon: zipResponse.data.lon,
-            });
+			tooLong.unshift({
+				lat: zipResponse.data.lat,
+				lon: zipResponse.data.lon,
+				zip: zip,
+			});
+			localStorage.setItem("rc", JSON.stringify(tooLong));
+		} else if (
+			JSON.parse(localStorage.getItem("rc")).length > 6 &&
+			findDupe(JSON.parse(localStorage.getItem("rc"))) === false
+		) {
+			const prevRecent = JSON.parse(localStorage.getItem("rc"));
+			prevRecent.pop();
+			prevRecent.unshift({
+				lat: zipResponse.data.lat,
+				lon: zipResponse.data.lon,
+				zip: zip,
+			});
+			localStorage.setItem("rc", JSON.stringify(prevRecent));
+		} else {
+			const prevRecent = JSON.parse(localStorage.getItem("rc"));
+			prevRecent.unshift({
+				lat: zipResponse.data.lat,
+				lon: zipResponse.data.lon,
+				zip: zip,
+			});
 			localStorage.setItem("rc", JSON.stringify(prevRecent));
 		}
 		setZip("");
-        navigate(`/weather/${zipResponse.data.name}/`)
+		navigate(`/weather/${zipResponse.data.name}/`);
 	};
-    useEffect(()=>{ 
-        if (localStorage.getItem("units") === null) {
-            localStorage.setItem("units", true)
-        }
-    }, [])
+	useEffect(() => {
+		if (localStorage.getItem("units") === null) {
+			const units = { useFahrenheit: true };
+			localStorage.setItem("units", JSON.stringify(units));
+		} else if (
+			JSON.parse(localStorage.getItem("units")).useFahrenheit === false
+		) {
+			setChecked(!checked);
+		}
+	}, []);
 	return (
 		<>
 			<nav>
-				<div className="nav_left">
-					<Link to="/"><img src={logo} alt="Weather Logo" /></Link>
-					<form onSubmit={(e) => zipHandler(e, zip)}>
-						<input
-							type="text"
-							placeholder="Enter Zip Code"
-							onChange={(e) => setZip(e.target.value)}
-							value={zip}
+				<div className="navbarcontent">
+					<div className="nav_left">
+						<Link to="/">
+							<img src={logo} alt="Weather Logo" />
+						</Link>
+						<form onSubmit={(e) => zipHandler(e, zip)}>
+							<input
+								type="text"
+								placeholder="Enter Zip Code"
+								onChange={(e) => setZip(e.target.value)}
+								value={zip}
+							/>
+						</form>
+						<Switch
+							onChange={handleChange}
+							checked={checked}
+							onColor="#f19122"
+							offColor="#0d8af5"
+							onHandleColor="#fff"
+							handleDiameter={30}
+							width={60}
+							checkedIcon={
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										paddingLeft: 5,
+										paddingTop: 2,
+										fontWeight: "bold",
+										color: "white",
+									}}>
+									°F
+								</div>
+							}
+							uncheckedIcon={
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										paddingRight: 5,
+										paddingTop: 2,
+										fontWeight: "bold",
+										color: "white",
+									}}>
+									°C
+								</div>
+							}
 						/>
-					</form>
-					<Switch
-						onChange={handleChange}
-						checked={checked}
-						onColor="#f19122"
-						onHandleColor="#f1602b"
-						handleDiameter={30}
-						width={60}
-						checkedIcon={
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-									paddingLeft: 5,
-									paddingTop: 2,
-									fontWeight: "bold",
-									color: "white",
-								}}>
-								°F
-							</div>
-						}
-						uncheckedIcon={
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-									paddingRight: 5,
-									paddingTop: 2,
-									fontWeight: "bold",
-									color: "white",
-								}}>
-								°C
-							</div>
-						}
-					/>
-				</div>
-				<div className="nav_right">
-					<ul>
-						<li>
-							<a href="/">Home</a>
-						</li>
-						<li>
-							<a href="/">Home</a>
-						</li>
-						<li>
-							<a href="/">Home</a>
-						</li>
-						<li>
-							<a href="/">Home</a>
-						</li>
-					</ul>
+					</div>
+					<div className="nav_right">
+						<ul>
+							<li>
+								<a href="/">Home</a>
+							</li>
+							<li>
+								<a
+									href="https://github.com/justin-mcclain"
+									target="_blank"
+									rel="noreferrer">
+									GitHub
+								</a>
+							</li>
+							<li>
+								<a href="/">External Parties</a>
+							</li>
+							{/* <li>
+                                <a href="/">Home</a>
+                            </li> */}
+						</ul>
+					</div>
 				</div>
 			</nav>
 		</>
