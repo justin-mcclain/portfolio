@@ -65,7 +65,6 @@ nav {
 }
 
 .recents {
-	border-bottom: 1px solid black;
 	height: 32px;
 	width: 100vw;
 	display: flex;
@@ -93,9 +92,6 @@ nav {
 		a {
 			text-decoration: none;
 			color: white;
-		}
-		a:hover {
-			background-color: #f25b2d;
 		}
 		ul {
 			display: flex;
@@ -460,8 +456,6 @@ nav {
 			font-size: 14px;
 			line-height: 24px;
 		}
-		.small-box-right-right {
-		}
 	}
 	.weatherside-header {
 		display: flex;
@@ -607,7 +601,6 @@ nav {
 }
 
 .error {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -616,16 +609,20 @@ nav {
     background-color: $black;
     color: white;
     // display: none;
+    .errorcontent {
+        position: relative;
+        width: 900px;
+    }
     .errormessage {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 3px 20px;
+        padding: 5px 20px;
         border-radius: 5px;
         background-color: #f25b2d;
         position: absolute;
-        left: 520px;
-        bottom: 7px;
+        left: 70px;
+        top: -20px;
         p {
             font-size: 14px;
         }
@@ -634,12 +631,15 @@ nav {
 			position: absolute;
 			font-size: 0.75rem;
 			top: 4px;
-			left: 202px;
+			left: 204px;
 			cursor: pointer;
-			width: 7px;
+			width: 5px;
 			height: auto;
 			filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(125deg)
 				brightness(109%) contrast(111%);
         }
+        img:hover {
+			opacity: 100%;
+		}
     }
 }

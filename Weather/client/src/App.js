@@ -33,7 +33,7 @@ function App() {
 	const [uvColor, setUvColor] = useState("");
 	const [cityWeath, setCityWeath] = useState([]);
 	const [airQual, setAirQual] = useState("");
-    const [formErrors, setFormErrors] = useState(false);
+	const [formErrors, setFormErrors] = useState(false);
 	return (
 		<Router>
 			<AppContext.Provider
@@ -74,12 +74,12 @@ function App() {
 					setCityWeath,
 					airQual,
 					setAirQual,
-                    formErrors,
-                    setFormErrors
+					formErrors,
+					setFormErrors,
 				}}>
 				<Navbar />
+				<Recent />
 				<div className="container">
-					<Recent />
 					<Routes>
 						<Route path="/" element={<Landing />} />
 						<Route path="*" element={<Error />} />

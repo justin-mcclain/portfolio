@@ -196,7 +196,7 @@ const Weather = () => {
 						</div>
 					</div>
 				</div>
-			) : null}
+			) : <p>Loading...</p>}
 		</>
 	);
 };

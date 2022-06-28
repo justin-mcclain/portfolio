@@ -203,10 +203,12 @@ const Navbar = () => {
 			</nav>
 			{formErrors ? (
 				<div className="error">
-					<div className="errormessage">
-                        <img src={closeX} alt="" onClick={() => closeError()}/>
-						<p>Please enter a valid zip code</p>
-					</div>
+					<div className="errorcontent">
+                        <div className="errormessage">
+                                                <img src={closeX} alt="" onClick={() => closeError()}/>
+                            <p>Please enter a valid zip code</p>
+                        </div>
+                    </div>
 				</div>
 			) : null}
 		</>
