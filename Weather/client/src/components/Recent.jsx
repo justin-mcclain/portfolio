@@ -32,7 +32,7 @@ const Recent = () => {
                                     .sort((a, b) => a.index - b.index)
                                     .map((rc, index) => {
                                         return (
-                                            <Link to={`/weather/${rc.name}`} key={index}>
+                                            <Link to={`/weather/current/${rc.name}`} key={index}>
                                                 <li key={index}>
                                                     {rc.name}, {rc.state}
                                                 </li>

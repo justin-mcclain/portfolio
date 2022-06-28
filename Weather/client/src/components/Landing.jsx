@@ -5,20 +5,29 @@ import rainDrop from "../assets/waterdrop.svg";
 import closeX from "../assets/close.svg";
 
 const Landing = () => {
-	const { weath, setWeath, checked } = useContext(AppContext);
-	const [tempColor, setTempColor] = useState("");
-	const [uv, setUv] = useState("");
+	const {
+		weath,
+		setWeath,
+		checked,
+		tempColor,
+		setTempColor,
+		uv,
+		setUv,
+		cityWeath,
+		setCityWeath,
+		uvColor,
+		setUvColor,
+	} = useContext(AppContext);
 	const [loading, setLoading] = useState(true);
-	const [cityWeath, setCityWeath] = useState([]);
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
 	const hideAlert = () => {
-		document.getElementById("alert").style.display = "none";
+        document.getElementById("alert").style.display = "none";
 	};
 	useEffect(() => {
-		const getWeather = async () => {
-			const mostRecent = JSON.parse(localStorage.getItem("rc"))[0];
+        const getWeather = async () => {
+            const mostRecent = JSON.parse(localStorage.getItem("rc"))[0];
 			const theWeather = await (checked
 				? axios.get(
 						`https://api.openweathermap.org/data/2.5/onecall?lat=${mostRecent.lat}&lon=${mostRecent.lon}&exclude=minutely&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
@@ -33,12 +42,15 @@ const Landing = () => {
 			setCityWeath(theCity.data[0]);
 			if (theWeather.data.daily[0].uvi < 3) {
 				setUv("Low");
+				// setUvColor("#67BE4D");
 			} else if (theWeather.data.daily[0].uvi < 6) {
 				setUv("Moderate");
+				// setUvColor("#FCBD22");
 			} else if (theWeather.data.daily[0].uvi < 8) {
 				setUv("High");
+				// setUvColor("#F66B34");
 			} else if (theWeather.data.daily[0].uvi > 7) {
-				setUv("Very High");
+				setUv("Very High") && setUvColor("#FF0000");
 			}
 			if (checked && theWeather.data.current.temp >= 90) {
 				setTempColor("#d5202a");
@@ -152,8 +164,8 @@ const Landing = () => {
 
 			{loading === false ? (
 				<div className="landing">
-					<div className="header">
-						{cityWeath.name}, {cityWeath.state}
+					<div className="landheader">
+						<h1>{cityWeath.name}, {cityWeath.state}</h1>
 					</div>
 
 					<div className="content">
@@ -191,7 +203,7 @@ const Landing = () => {
 							</p>
 							<p>{weath.daily[0].weather[0].description}</p>
 							<p>
-								High:
+								High:&nbsp;
 								{weath.daily[0].temp.max.toFixed()}
 								{checked ? "°F" : "°C"}
 							</p>

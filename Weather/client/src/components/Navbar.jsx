@@ -6,7 +6,7 @@ import { AppContext } from "../App";
 import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
-	const { setWeath, setChecked, setZip, zip, checked, setCity, test2, setTest2 } =
+	const { setWeath, setChecked, setZip, zip, checked, setCity } =
 		useContext(AppContext);
 	const navigate = useNavigate();
 	const handleChange = (nextChecked) => {
@@ -39,11 +39,9 @@ const Navbar = () => {
 			  )
 			: await axios.get(
 					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-			  );
-        const hehe = await axios.get("https://api.openweathermap.org/geo/1.0/direct?q=Birmingham&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09")      
+			  );    
 		setCity(zipResponse.data);
 		setWeath(response.data);
-        setTest2(hehe.data);
 		if (localStorage.getItem("rc") === null) {
 			localStorage.setItem(
 				"rc",
@@ -97,7 +95,7 @@ const Navbar = () => {
 			localStorage.setItem("rc", JSON.stringify(prevRecent));
 		}
 		setZip("");
-		navigate(`/weather/${zipResponse.data.name}/`);
+		navigate(`/weather/current/${zipResponse.data.name}/`);
 	};
 	useEffect(() => {
 		if (localStorage.getItem("units") === null) {
@@ -128,7 +126,7 @@ const Navbar = () => {
 						<Switch
 							onChange={handleChange}
 							checked={checked}
-							onColor="#f19122"
+							onColor="#f25b2d"
 							offColor="#0d8af5"
 							onHandleColor="#fff"
 							handleDiameter={30}
