@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../App";
 import rainDrop from "../assets/waterdrop.svg";
 import { Line } from "react-chartjs-2";
@@ -9,28 +9,18 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 const Weather = () => {
 	const {
 		weath,
-		setWeath,
 		checked,
-		city,
-		weathLoc,
-		setWeathLoc,
 		moreLoad,
-		hourData,
 		graphData,
-		airData,
 		uv,
 		airQual,
 	} = useContext(AppContext);
 	Chart.register(ChartDataLabels);
 	Chart.register(...registerables);
 	Chart.defaults.font.size = 12;
-	const [anotherLoad, setAnotherLoad] = useState(false);
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
-	useEffect(() => {
-		setAnotherLoad(true);
-	}, [checked]);
 	function displayChart() {
 		if (moreLoad) {
 			const data = {
@@ -104,7 +94,7 @@ const Weather = () => {
 			<div className="header">
 				<h2>Current Weather</h2>
 			</div>
-			{anotherLoad ? (
+			{moreLoad ? (
 				<div className="weather">
 					<div className="weatherleft">
 						<div className="weatherleft_box">

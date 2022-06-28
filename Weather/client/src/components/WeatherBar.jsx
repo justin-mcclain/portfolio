@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AppContext } from "../App";
 import { useParams, Outlet, Link } from "react-router-dom";
 
 const WeatherBar = () => {
 	const {
-		weath,
 		setWeath,
 		checked,
 		city,
@@ -18,8 +17,6 @@ const WeatherBar = () => {
 		setMoreLoad,
 		setGraphData,
 		setAirData,
-		setUv,
-		setTempColor,
 		setAirQual
 	} = useContext(AppContext);
 	const { acity } = useParams();

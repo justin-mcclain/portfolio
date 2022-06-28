@@ -1,23 +1,16 @@
 import React from "react";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../App";
-import { useParams } from "react-router-dom";
-
 
 const Hourly = () => {
 	const {
-        weath,
 		checked,
 		hourData,
-		moreLoad,
+		moreLoad
 	} = useContext(AppContext);
-	const { acity } = useParams();
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
-    useEffect(() => {
-
-    }, [checked])
 	return (
 		<>
 			<div className="hourly">
@@ -77,7 +70,7 @@ const Hourly = () => {
 											<td>{hour.dew_point.toFixed()}{checked ? "°F" : "°C"}</td>
 											<td>{hour.humidity}%</td>
 											<td>
-												{hour.wind_speed.toFixed()} mph{" "}
+												{hour.wind_speed.toFixed()} {checked? "mph" : "km/h"}{" "}
 											</td>
 										</tr>
 									);

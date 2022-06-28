@@ -4,10 +4,19 @@ import Switch from "react-switch";
 import axios from "axios";
 import { AppContext } from "../App";
 import { useNavigate, Link } from "react-router-dom";
+import closeX from "../assets/close.svg";
 
 const Navbar = () => {
-	const { setWeath, setChecked, setZip, zip, checked, setCity } =
-		useContext(AppContext);
+	const {
+		setWeath,
+		setChecked,
+		setZip,
+		zip,
+		checked,
+		setCity,
+		formErrors,
+		setFormErrors,
+	} = useContext(AppContext);
 	const navigate = useNavigate();
 	const handleChange = (nextChecked) => {
 		setChecked(nextChecked);
@@ -15,6 +24,9 @@ const Navbar = () => {
 		units.useFahrenheit = !units.useFahrenheit;
 		localStorage.setItem("units", JSON.stringify(units));
 	};
+    const closeError = () => {
+        setFormErrors(false)
+    }
 	const hasLetters = /[a-z]/i;
 	const zipHandler = async (e, zip) => {
 		e.preventDefault();
@@ -30,16 +42,21 @@ const Navbar = () => {
 				}
 			}
 		};
-		const zipResponse = await axios.get(
-					`http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-			  );
+		const zipResponse = await axios
+			.get(
+				`http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+			)
+			.catch(() => {
+                setFormErrors(true);
+                setZip("")
+			});
 		const response = checked
 			? await axios.get(
 					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
 			  )
 			: await axios.get(
 					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-			  );    
+			  );
 		setCity(zipResponse.data);
 		setWeath(response.data);
 		if (localStorage.getItem("rc") === null) {
@@ -184,6 +201,14 @@ const Navbar = () => {
 					</div>
 				</div>
 			</nav>
+			{formErrors ? (
+				<div className="error">
+					<div className="errormessage">
+                        <img src={closeX} alt="" onClick={() => closeError()}/>
+						<p>Please enter a valid zip code</p>
+					</div>
+				</div>
+			) : null}
 		</>
 	);
 };

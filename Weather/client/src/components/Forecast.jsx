@@ -1,21 +1,13 @@
 import React from "react";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../App";
-import { useParams } from "react-router-dom";
 import rainDrop from "../assets/waterdrop.svg";
 
 const Forecast = () => {
 	const {
-		weath,
-		setWeath,
 		checked,
-		city,
-		weathLoc,
-		setWeathLoc,
 		fcData,
-		moreLoad,
 	} = useContext(AppContext);
-	const { acity } = useParams();
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
