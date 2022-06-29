@@ -16,8 +16,7 @@ const Hourly = () => {
 			<div className="hourly">
 				<div className="header">
 						<h2>
-							Hourly Forecast for{" "}
-							{dayjs(hourData.dt).format("dddd MMMM Do")}
+							Hourly Forecast
 						</h2>
 				</div>
 				<table>
