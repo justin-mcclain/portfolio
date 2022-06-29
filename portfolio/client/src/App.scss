@@ -170,6 +170,14 @@ img {
 }
 
 .thumb {
+  background-image: url(./assets/weather.png);
+  background-size: cover;
+  background-color: #cccccc;
+  height: 225px;
+  position: relative;
+}
+
+.thumb2 {
   background-image: url(./assets/finance.png);
   background-size: cover;
   background-color: #cccccc;
@@ -212,6 +220,14 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  line-height: 25px;
+  .projectlinks {
+    display: flex;
+    gap: 10px;
+  };
+  a {
+    text-decoration: none;
+  }
 }
 
 .contact { 
@@ -359,6 +375,10 @@ img {
     }
   }
   .thumb {
+    height: 200px;
+    background-size: 100% 100%;
+  }
+  .thumb2 {
     height: 200px;
     background-size: 100% 100%;
   }

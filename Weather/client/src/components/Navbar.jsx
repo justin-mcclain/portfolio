@@ -113,6 +113,7 @@ const Navbar = () => {
 		}
 		setZip("");
 		navigate(`/weather/current/${zipResponse.data.name}/`);
+        setFormErrors(false);
 	};
 	useEffect(() => {
 		if (localStorage.getItem("units") === null) {
@@ -205,7 +206,7 @@ const Navbar = () => {
 				<div className="error">
 					<div className="errorcontent">
                         <div className="errormessage">
-                                                <img src={closeX} alt="" onClick={() => closeError()}/>
+                                <img src={closeX} alt="" onClick={() => closeError()}/>
                             <p>Please enter a valid zip code</p>
                         </div>
                     </div>
