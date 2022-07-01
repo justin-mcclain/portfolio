@@ -102,10 +102,10 @@ noZipWeather();
 								{weathLoc.name}, {weathLoc.state}
 							</h2>
 							<p>
-								{weathLoc.lat.toFixed(2)}
+								{Math.sign(weathLoc.lon) === 1 ? weathLoc.lat.toFixed(2) : weathLoc.lat.toFixed(2).slice(1)}
 								{Math.sign(weathLoc.lat) === 1
 									? "°N"
-									: "°S"}, {weathLoc.lon.toFixed(2)}
+									: "°S"}, {Math.sign(weathLoc.lon) === 1 ? weathLoc.lon.toFixed(2) : weathLoc.lon.toFixed(2).slice(1)}
 								{Math.sign(weathLoc.lon) === 1 ? "°E" : "°W"}
 							</p>
 						</div>
