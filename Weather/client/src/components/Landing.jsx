@@ -37,13 +37,13 @@ const Landing = () => {
 			const mostRecent = JSON.parse(localStorage.getItem("rc"))[0];
 			const theWeather = await (checked
 				? axios.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=${mostRecent.lat}&lon=${mostRecent.lon}&exclude=minutely&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`https://api.openweathermap.org/data/2.5/onecall?lat=${mostRecent.lat}&lon=${mostRecent.lon}&exclude=minutely&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 				  )
 				: axios.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=${mostRecent.lat}&lon=${mostRecent.lon}&exclude=minutely&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`https://api.openweathermap.org/data/2.5/onecall?lat=${mostRecent.lat}&lon=${mostRecent.lon}&exclude=minutely&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 				  ));
 			const theCity = await axios.get(
-				`http://api.openweathermap.org/geo/1.0/reverse?lat=${mostRecent.lat}&lon=${mostRecent.lon}&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+				`http://api.openweathermap.org/geo/1.0/reverse?lat=${mostRecent.lat}&lon=${mostRecent.lon}&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 			);
 			setWeath(theWeather.data);
 			setCityWeath(theCity.data[0]);
@@ -95,13 +95,13 @@ const Landing = () => {
 		const emptyWeather = async () => {
 			const theWeather = await (checked
 				? axios.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=41.87&lon=-87.65&exclude=minutely&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`https://api.openweathermap.org/data/2.5/onecall?lat=41.87&lon=-87.65&exclude=minutely&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 				  )
 				: axios.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=41.87&lon=-87.65&exclude=minutely&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`https://api.openweathermap.org/data/2.5/onecall?lat=41.87&lon=-87.65&exclude=minutely&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 				  ));
 			const theCity = await axios.get(
-				`http://api.openweathermap.org/geo/1.0/reverse?lat=41.87&lon=-87.65&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+				`http://api.openweathermap.org/geo/1.0/reverse?lat=41.87&lon=-87.65&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 			);
 			setWeath(theWeather.data);
 			setCityWeath(theCity.data[0]);

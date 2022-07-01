@@ -28,17 +28,17 @@ const WeatherBar = () => {
 	useEffect(() => {
 		const noZipWeather = async () => {
 			const theCity = await axios.get(
-				`http://api.openweathermap.org/geo/1.0/reverse?lat=${alat}&lon=${alon}&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+				`http://api.openweathermap.org/geo/1.0/reverse?lat=${alat}&lon=${alon}&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 			);
 			const theAir = await axios.get(
-				`http://api.openweathermap.org/data/2.5/air_pollution?lat=${alat}&lon=${alon}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+				`http://api.openweathermap.org/data/2.5/air_pollution?lat=${alat}&lon=${alon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 			);
 			const theWeather = await (checked
 				? axios.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=${alat}&lon=${alon}&exclude=minutely&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`https://api.openweathermap.org/data/2.5/onecall?lat=${alat}&lon=${alon}&exclude=minutely&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 				  )
 				: axios.get(
-						`https://api.openweathermap.org/data/2.5/onecall?lat=${alat}&lon=${alon}&exclude=minutely&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`https://api.openweathermap.org/data/2.5/onecall?lat=${alat}&lon=${alon}&exclude=minutely&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 				  ));
 			setWeath(theWeather.data);
 			console.log("I DID NOT USE A ZIP CODE");

@@ -43,7 +43,7 @@ const Navbar = () => {
 		};
 		const zipResponse = await axios
 			.get(
-				`http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+				`http://api.openweathermap.org/geo/1.0/zip?zip=${zip}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 			)
 			.catch(() => {
                 setFormErrors(true);

@@ -12,7 +12,7 @@ const Recent = () => {
 			JSON.parse(localStorage.getItem("rc")).map((city, index) => {
 				axios
 					.get(
-						`http://api.openweathermap.org/geo/1.0/reverse?lat=${city.lat}&lon=${city.lon}&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+						`http://api.openweathermap.org/geo/1.0/reverse?lat=${city.lat}&lon=${city.lon}&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 					)
 					.then((res) => {
 						setTest((test) => [...test, { ...res.data[0], zip: city.zip, index }]);
