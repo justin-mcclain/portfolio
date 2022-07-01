@@ -171,14 +171,13 @@ const Landing = () => {
 				</div>
 			) : null}
 
-			{isDesktop ? (
+			{loading === false ? isDesktop? (
 				<div className="landing">
 					<div className="landheader">
 						<h1>
 							{cityWeath.name}, {cityWeath.state}
 						</h1>
 					</div>
-
 					<div className="content">
 						<div className="current">
 							<div className="currentheader">
@@ -255,7 +254,7 @@ const Landing = () => {
 							</p>
 						</div>
 					</div>
-					<button>Full Forecast</button>
+					<button><Link to={`/weather/current/${cityWeath.name}`}>Full Forecast</Link></button>
 				</div>
 			) : (
 				<div className="mobilelanding">
@@ -287,7 +286,7 @@ const Landing = () => {
 					</div>
 					<button><Link to={`/weather/current/${cityWeath.name}`}>Full Forecast</Link></button>
 				</div>
-			)}
+			) : null }
 		</>
 	);
 };
