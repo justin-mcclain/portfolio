@@ -17,13 +17,17 @@ const WeatherBar = () => {
 		setMoreLoad,
 		setGraphData,
 		setAirData,
-		setAirQual
+		setAirQual,
+		setUv,
+		setUvColor,
+		adjust,
+		weath,
+		setAdjust
 	} = useContext(AppContext);
 	const { acity } = useParams();
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
-	const hourMath = 24 - dayjs().get("hour");
 	useEffect(() => {
 		const getWeather = async () => {
 			const theWeather = await (checked
@@ -42,19 +46,48 @@ const WeatherBar = () => {
 			setWeath(theWeather.data);
 			setWeathLoc(theCity.data[0]);
 			setAirData(theAir.data);
-			setHourData(theWeather.data.hourly.slice(1, hourMath));
+			const getAdjust = () => {
+				if (theWeather.data.timezone_offset === -14400) {
+					return 1
+				} else if (theWeather.data.timezone_offset === -25200) {
+					return -2 
+				} else if (theWeather.data.timezone_offset === -21600) {
+					return -1
+				} else if (theWeather.data.timezone_offset === -18000) {
+					return 0
+				}
+			}
+			const timeAdjust = async () => {
+				const adjustBy = await getAdjust();
+				const hourMath = await (24 - dayjs().get("hour") - adjustBy);
+				setHourData(theWeather.data.hourly.slice(1, hourMath));
+				setAdjust(adjustBy)
+			}
+			timeAdjust();
 			setGraphData(theWeather.data.hourly);
 			setFcData(theWeather.data.daily);
+			if (theWeather.data.daily[0].uvi < 3) {
+				setUv("Low");
+				// setUvColor("#67BE4D");
+			} else if (theWeather.data.daily[0].uvi < 6) {
+				setUv("Moderate");
+				// setUvColor("#FCBD22");
+			} else if (theWeather.data.daily[0].uvi < 8) {
+				setUv("High");
+				// setUvColor("#F66B34");
+			} else if (theWeather.data.daily[0].uvi > 7) {
+				setUv("Very High") && setUvColor("#FF0000");
+			}
 			if (theAir.data.list[0].main.aqi === 1) {
-				setAirQual("Good")
+				setAirQual("Good");
 			} else if (theAir.data.list[0].main.aqi === 2) {
-				setAirQual("Fair")
+				setAirQual("Fair");
 			} else if (theAir.data.list[0].main.aqi === 3) {
-				setAirQual("Moderate")
+				setAirQual("Moderate");
 			} else if (theAir.data.list[0].main.aqi === 4) {
-				setAirQual("Poor")
+				setAirQual("Poor");
 			} else if (theAir.data.list[0].main.aqi === 5) {
-				setAirQual("Very Poor")
+				setAirQual("Very Poor");
 			}
 			setMoreLoad(true);
 		};
@@ -75,19 +108,48 @@ const WeatherBar = () => {
 			setWeath(theWeather.data);
 			setWeathLoc(theCity.data[0]);
 			setAirData(theAir.data);
-			setHourData(theWeather.data.hourly.slice(1, hourMath));
+			const getAdjust = () => {
+				if (theWeather.data.timezone_offset === -14400) {
+					return 1
+				} else if (theWeather.data.timezone_offset === -25200) {
+					return -2 
+				} else if (theWeather.data.timezone_offset === -21600) {
+					return -1
+				} else if (theWeather.data.timezone_offset === -18000) {
+					return 0
+				}
+			}
+			const timeAdjust = async () => {
+				const adjustBy = await getAdjust();
+				const hourMath = await (24 - dayjs().get("hour") - adjustBy);
+				setHourData(theWeather.data.hourly.slice(1, hourMath));
+				setAdjust(adjustBy)
+			}
+			timeAdjust();
 			setGraphData(theWeather.data.hourly);
 			setFcData(theWeather.data.daily);
+			if (theWeather.data.daily[0].uvi < 3) {
+				setUv("Low");
+				// setUvColor("#67BE4D");
+			} else if (theWeather.data.daily[0].uvi < 6) {
+				setUv("Moderate");
+				// setUvColor("#FCBD22");
+			} else if (theWeather.data.daily[0].uvi < 8) {
+				setUv("High");
+				// setUvColor("#F66B34");
+			} else if (theWeather.data.daily[0].uvi > 7) {
+				setUv("Very High") && setUvColor("#FF0000");
+			}
 			if (theAir.data.list[0].main.aqi === 1) {
-				setAirQual("Good")
+				setAirQual("Good");
 			} else if (theAir.data.list[0].main.aqi === 2) {
-				setAirQual("Fair")
+				setAirQual("Fair");
 			} else if (theAir.data.list[0].main.aqi === 3) {
-				setAirQual("Moderate")
+				setAirQual("Moderate");
 			} else if (theAir.data.list[0].main.aqi === 4) {
-				setAirQual("Poor")
+				setAirQual("Poor");
 			} else if (theAir.data.list[0].main.aqi === 5) {
-				setAirQual("Very Poor")
+				setAirQual("Very Poor");
 			}
 			setMoreLoad(true);
 		};

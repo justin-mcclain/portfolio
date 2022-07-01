@@ -109,13 +109,15 @@ const Weather = () => {
 								<div className="temp">
 									<div className="tempnumber">
 										<p>{weath.current.temp.toFixed()}</p>
-										<p>{checked ? "°F" : "°C"}</p>
+										{/* <p>{checked ? "°F" : "°C"}</p> */}
 									</div>
-									<p>
-										Feels like{" "}
-										{weath.current.feels_like.toFixed()}°
-										{checked ? "F" : "C"}
-									</p>
+									<div className="feelslike">
+										<p>
+											Feels like{" "}
+											{weath.current.feels_like.toFixed()}°
+											{checked ? "F" : "C"}
+										</p>
+									</div>
 								</div>
 							</div>
 							<div className="small-box-right">

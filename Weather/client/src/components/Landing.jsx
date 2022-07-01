@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../App";
 import rainDrop from "../assets/waterdrop.svg";
 import closeX from "../assets/close.svg";
+import { useParams, Link } from "react-router-dom";
 
 const Landing = () => {
 	const {
@@ -17,17 +18,23 @@ const Landing = () => {
 		setCityWeath,
 		uvColor,
 		setUvColor,
+		setIsDesktop,
+		isDesktop,
 	} = useContext(AppContext);
+	const { acity } = useParams();
+	const updateMedia = () => {
+		setIsDesktop(window.innerWidth > 900);
+	};
 	const [loading, setLoading] = useState(true);
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
 	const hideAlert = () => {
-        document.getElementById("alert").style.display = "none";
+		document.getElementById("alert").style.display = "none";
 	};
 	useEffect(() => {
-        const getWeather = async () => {
-            const mostRecent = JSON.parse(localStorage.getItem("rc"))[0];
+		const getWeather = async () => {
+			const mostRecent = JSON.parse(localStorage.getItem("rc"))[0];
 			const theWeather = await (checked
 				? axios.get(
 						`https://api.openweathermap.org/data/2.5/onecall?lat=${mostRecent.lat}&lon=${mostRecent.lon}&exclude=minutely&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
@@ -82,6 +89,8 @@ const Landing = () => {
 				setTempColor("#ac54a0");
 			}
 			setLoading(false);
+			window.addEventListener("resize", updateMedia);
+			return () => window.removeEventListener("resize", updateMedia);
 		};
 		const emptyWeather = async () => {
 			const theWeather = await (checked
@@ -162,10 +171,12 @@ const Landing = () => {
 				</div>
 			) : null}
 
-			{loading === false ? (
+			{isDesktop ? (
 				<div className="landing">
 					<div className="landheader">
-						<h1>{cityWeath.name}, {cityWeath.state}</h1>
+						<h1>
+							{cityWeath.name}, {cityWeath.state}
+						</h1>
 					</div>
 
 					<div className="content">
@@ -184,7 +195,7 @@ const Landing = () => {
 								<div className="temp">
 									<div className="tempnumber">
 										<p>{weath.current.temp.toFixed()}</p>
-										<p>{checked ? "°F" : "°C"}</p>
+										{/* <p>{checked ? "°F" : "°C"}</p> */}
 									</div>
 									<p>
 										Feels like{" "}
@@ -244,8 +255,39 @@ const Landing = () => {
 							</p>
 						</div>
 					</div>
+					<button>Full Forecast</button>
 				</div>
-			) : null}
+			) : (
+				<div className="mobilelanding">
+					<div className="landheader">
+						<h1>
+							{cityWeath.name}, {cityWeath.state}
+						</h1>
+					</div>
+					<div className="content">
+						<div className="icon">
+							<img
+								src={`http://openweathermap.org/img/wn/${weath.current.weather[0].icon}@4x.png`}
+								alt=""
+							/>
+							<p>{weath.current.weather[0].main}</p>
+						</div>
+						<div className="temp">
+							<div className="tempnumber">
+								<p>{weath.current.temp.toFixed()}</p>
+								{/* <p>{checked ? "°F" : "°C"}</p> */}
+							</div>
+							<div className="feelslike">
+								<p>
+									Feels like {weath.current.feels_like.toFixed()}°
+									{checked ? "F" : "C"}
+								</p>
+							</div>
+						</div>
+					</div>
+					<button><Link to={`/weather/current/${cityWeath.name}`}>Full Forecast</Link></button>
+				</div>
+			)}
 		</>
 	);
 };

@@ -195,9 +195,6 @@ const Navbar = () => {
 							<li>
 								<a href="/">External Parties</a>
 							</li>
-							{/* <li>
-                                <a href="/">Home</a>
-                            </li> */}
 						</ul>
 					</div>
 				</div>

@@ -34,6 +34,8 @@ function App() {
 	const [cityWeath, setCityWeath] = useState([]);
 	const [airQual, setAirQual] = useState("");
 	const [formErrors, setFormErrors] = useState(false);
+	const [isDesktop, setIsDesktop] = useState(window.innerWidth > 900);
+	const [adjust, setAdjust] = useState("");
 	return (
 		<Router>
 			<AppContext.Provider
@@ -76,6 +78,10 @@ function App() {
 					setAirQual,
 					formErrors,
 					setFormErrors,
+					isDesktop,
+					setIsDesktop,
+					adjust,
+					setAdjust
 				}}>
 				<Navbar />
 				<Recent />
