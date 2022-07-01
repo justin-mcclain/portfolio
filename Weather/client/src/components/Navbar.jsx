@@ -8,12 +8,10 @@ import closeX from "../assets/close.svg";
 
 const Navbar = () => {
 	const {
-		setWeath,
 		setChecked,
 		setZip,
 		zip,
 		checked,
-		setCity,
 		formErrors,
 		setFormErrors,
 	} = useContext(AppContext);
@@ -50,15 +48,6 @@ const Navbar = () => {
                 setFormErrors(true);
                 setZip("")
 			});
-		// const response = checked
-		// 	? await axios.get(
-		// 			`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-		// 	  )
-		// 	: await axios.get(
-		// 			`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-		// 	  );
-		setCity(zipResponse.data);
-		// setWeath(response.data);
 		if (localStorage.getItem("rc") === null) {
 			localStorage.setItem(
 				"rc",
