@@ -23,7 +23,7 @@ function Projects() {
 								<p>Languages used: HTML, SCSS, React.js</p>
 								<div className="projectlinks">
                                     <a
-                                        href="https://github.com/justin-mcclain/Assignments/tree/master/MERN/finance"
+                                        href="https://github.com/justin-mcclain/portfolio/tree/main/Weather/client"
                                         target="_blank"
                                         rel="noreferrer">
                                         <img src={githubLogo} alt="GitHub Logo" />
@@ -50,7 +50,7 @@ function Projects() {
 								<p>Languages used: HTML, CSS, React.js</p>
 								<div className="projectlinks">
                                     <a
-                                        href="https://github.com/justin-mcclain/Assignments/tree/master/MERN/finance"
+                                        href="https://github.com/justin-mcclain/portfolio/tree/main/finance"
                                         target="_blank"
                                         rel="noreferrer">
                                         <img src={githubLogo} alt="GitHub Logo" />

@@ -176,7 +176,7 @@ const Navbar = () => {
 							</li>
 							<li>
 								<a
-									href="https://github.com/justin-mcclain"
+									href="https://github.com/justin-mcclain/portfolio/tree/main/Weather/client"
 									target="_blank"
 									rel="noreferrer">
 									GitHub
