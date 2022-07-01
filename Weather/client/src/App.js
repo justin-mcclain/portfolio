@@ -17,7 +17,6 @@ function App() {
 	const [loaded, setLoaded] = useState(false);
 	const [checked, setChecked] = useState(true);
 	const [zip, setZip] = useState("");
-	const [city, setCity] = useState([]);
 	const [weath, setWeath] = useState([]);
 	const [recent, setRecent] = useState([]);
 	const [test, setTest] = useState([]);
@@ -48,8 +47,6 @@ function App() {
 					setZip,
 					weath,
 					setWeath,
-					city,
-					setCity,
 					recent,
 					setRecent,
 					test,

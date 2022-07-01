@@ -157,7 +157,7 @@ const Landing = () => {
 				<div id="alert">
 					<div className="alertcontent">
 						<p>
-							{weath.alerts[0].tags} alert starting{" "}
+							{weath.alerts[0].event} alert starting{" "}
 							{dayjs(weath.alerts[0].start * 1000).format(
 								"dddd MMMM Do h:mm A"
 							)}{" "}
@@ -254,7 +254,7 @@ const Landing = () => {
 							</p>
 						</div>
 					</div>
-					<button><Link to={`/weather/current/${cityWeath.name}`}>Full Forecast</Link></button>
+					<button><Link to={`/weather/current/${cityWeath.name}/${weath.lat}/${weath.lon}`}>Full Forecast</Link></button>
 				</div>
 			) : (
 				<div className="mobilelanding">
@@ -284,7 +284,7 @@ const Landing = () => {
 							</div>
 						</div>
 					</div>
-					<button><Link to={`/weather/current/${cityWeath.name}`}>Full Forecast</Link></button>
+					<button><Link to={`/weather/current/${cityWeath.name}/${weath.lat}/${weath.lon}`}>Full Forecast</Link></button>
 				</div>
 			) : null }
 		</>

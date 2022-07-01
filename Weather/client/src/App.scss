@@ -193,17 +193,17 @@ nav {
 			position: relative;
 			font-weight: 400;
 		}
-		h1::before {
-			content: "";
-			position: absolute;
-			left: 50%;
-			bottom: 0px;
-			width: 97%;
-			height: 14px;
-			transform: skew(-12deg) translateX(-50%);
-			background: rgba(241, 92, 43, 0.5);
-			z-index: -1;
-		}
+		// h1::before {
+		// 	content: "";
+		// 	position: absolute;
+		// 	left: 50%;
+		// 	bottom: 0px;
+		// 	width: 97%;
+		// 	height: 14px;
+		// 	transform: skew(-12deg) translateX(-50%);
+		// 	background: rgba(241, 92, 43, 0.5);
+		// 	z-index: -1;
+		// }
 	}
 	.content {
 		width: 100%;
