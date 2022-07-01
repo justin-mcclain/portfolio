@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fullpage {
+    background-color: whitesmoke !important;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+    height: 100vh;
+}
+
+.leftlogin {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    align-items: flex-start;
+    padding: 3em;
+}
+
+.leftlogin p {
+    margin-top: 1em;
+    letter-spacing: .02em;
+}
+
+.leftlogin h2 {
+    margin-bottom: 1em;
+}
+
+.rightlogin {
+    width: calc(100vw - 350px);
+    background-image: url(../public/images/box.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+/* DASHBOARD */
+
+.left {
+    width: 250px;
+    align-self: stretch;
+    background-color: #3c689b;
+    padding: 1em;
+}
+
+.left button {
+    background-color: #50AF95 !important;
+}
+
+.leftcontent p {
+    color: white;
+}
+
+.top {
+    width: 100%;
+    height: 225px;
+    background-image: url(../public/images/banner.jpg);
+    background-position: center;
+    background-size: cover; 
+}
+
+.top h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5em;
+    color: white;
+    margin-left: .55em;
+    text-shadow: 2px 2px 12px rgba(0,0,0,0.67);
+}
+
+.right {
+    width: 100%;
+    position: relative;
+    min-height: 300px;
+    background-color: whitesmoke;
+}
+
+.middle {
+    background-color: whitesmoke;
+    margin-top: 4em;
+    margin-bottom: 4em;
+}
+
+.bottom {
+    background-color: whitesmoke;
+    min-height: 300px;
+}
+
+.boxholder {
+    position: relative;
+}
+
+.float {
+    width: 275px;
+    height: 220px;
+    padding: 1em;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.35) 0px 5px 15px;
+    position: absolute;
+}
+
+.float1 {
+    right: 205px;
+    top: 115px;
+}
+
+.float2 {
+    right: -130px;
+    top: 115px;
+}
+
+.float3 {
+    left: 188px;
+    top: 115px;
+}
+
+.contentsquare {
+    background-color: white;
+    width: 90%;
+    min-height: 200px;
+    padding: 1.5em;
+    box-shadow: rgba(99, 99, 99, 0.35) 0px 5px 15px;
+}
+
+.contenttop {
+    margin-bottom: 2em;
+}
+
+.contentdata p {
+    margin-bottom: 0px !important;
+}
+
+.sorting {
+    gap: .5em;
+}
