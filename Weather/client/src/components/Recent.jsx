@@ -15,11 +15,10 @@ const Recent = () => {
 						`http://api.openweathermap.org/geo/1.0/reverse?lat=${city.lat}&lon=${city.lon}&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
 					)
 					.then((res) => {
-						setTest((test) => [...test, { ...res.data[0], zip: city.zip, index }]);
+						setTest((test) => [...test, { name: res.data[0].name, state: res.data[0].state, lat: city.lat, lon: city.lon, zip: city.zip, index }]);
 					});
 			});
 		}
-
 		setLoaded(true);
 	}, [weath]);
 	return (
@@ -33,7 +32,7 @@ const Recent = () => {
                                     .sort((a, b) => a.index - b.index)
                                     .map((rc, index) => {
                                         return (
-                                            <Link to={`/weather/current/${rc.name}/${rc.lat.toFixed(2)}/${rc.lon.toFixed(2)}`} key={index}>
+                                            <Link to={`/weather/current/${rc.name}/${rc.lat}/${rc.lon}`} key={index}>
                                                 <li key={index}>
                                                     {rc.name}, {rc.state}
                                                 </li>

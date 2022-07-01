@@ -10,6 +10,7 @@ import Weather from "./components/Weather";
 import Hourly from "./components/Hourly";
 import Forecast from "./components/Forecast";
 import Footer from "./components/Footer";
+import Sources from "./components/Sources";
 
 export const AppContext = createContext();
 
@@ -86,6 +87,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Landing />} />
 						<Route path="*" element={<Error />} />
+						<Route path="sources" element={<Sources />} />
 						<Route path="weather" element={<WeatherBar />}>
 							<Route
 								path="current/:acity/:alat/:alon"

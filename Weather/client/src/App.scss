@@ -523,14 +523,15 @@ nav {
 			font-size: 16px;
 		}
 	}
-	.chartheader {
-		left: 215px;
-		position: absolute;
-	}
-	.chart {
-		width: 100%;
-		margin-top: 25px;
-		margin-bottom: 10px;
+	.weatherleft_box:nth-child(2) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.chart {
+			width: 100%;
+			margin-top: 25px;
+			margin-bottom: 10px;
+		}
 	}
 }
 
@@ -700,6 +701,35 @@ nav {
 		}
 	}
 }
+
+.sources {
+	width: 300px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	padding: 10px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	line-height: 30px;
+	a {
+		text-decoration: none;
+		color: black;
+	}
+	a:hover {
+		text-decoration: underline;
+		text-underline-offset: 0.5rem;
+		text-decoration-color: #f25b2d;
+	}
+}
+
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*----------------------------- MOBILE ------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------*/
 
 @media screen and (max-width: 768px) {
 	nav {

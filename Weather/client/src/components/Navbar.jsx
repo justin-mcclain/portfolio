@@ -101,7 +101,7 @@ const Navbar = () => {
 			});
 			localStorage.setItem("rc", JSON.stringify(prevRecent));
 		}
-		navigate(`/weather/current/${zipResponse.data.name}/${zipResponse.data.lat.toFixed(2)}/${zipResponse.data.lon.toFixed(2)}`);
+		navigate(`/weather/current/${zipResponse.data.name}/${zipResponse.data.lat}/${zipResponse.data.lon}`);
 		setZip("");
         setFormErrors(false);
 	};
@@ -134,7 +134,7 @@ const Navbar = () => {
 						<Switch
 							onChange={handleChange}
 							checked={checked}
-							onColor="#f25b2d"
+							onColor="#f2663c"
 							offColor="#0d8af5"
 							onHandleColor="#fff"
 							handleDiameter={30}
@@ -183,7 +183,7 @@ const Navbar = () => {
 								</a>
 							</li>
 							<li>
-								<a href="/">External Parties</a>
+								<a href="/sources">External Sources</a>
 							</li>
 						</ul>
 					</div>
