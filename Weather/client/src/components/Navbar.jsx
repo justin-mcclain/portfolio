@@ -50,15 +50,15 @@ const Navbar = () => {
                 setFormErrors(true);
                 setZip("")
 			});
-		const response = checked
-			? await axios.get(
-					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-			  )
-			: await axios.get(
-					`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
-			  );
+		// const response = checked
+		// 	? await axios.get(
+		// 			`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+		// 	  )
+		// 	: await axios.get(
+		// 			`https://api.openweathermap.org/data/2.5/onecall?lat=${zipResponse.data.lat}&lon=${zipResponse.data.lon}&exclude=minutely,alerts&units=metric&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+		// 	  );
 		setCity(zipResponse.data);
-		setWeath(response.data);
+		// setWeath(response.data);
 		if (localStorage.getItem("rc") === null) {
 			localStorage.setItem(
 				"rc",
@@ -111,8 +111,8 @@ const Navbar = () => {
 			});
 			localStorage.setItem("rc", JSON.stringify(prevRecent));
 		}
+		navigate(`/weather/current/${zipResponse.data.name}/${zipResponse.data.lat.toFixed(2)}/${zipResponse.data.lon.toFixed(2)}`);
 		setZip("");
-		navigate(`/weather/current/${zipResponse.data.name}/`);
         setFormErrors(false);
 	};
 	useEffect(() => {
@@ -135,7 +135,7 @@ const Navbar = () => {
 						</Link>
 						<form onSubmit={(e) => zipHandler(e, zip)}>
 							<input
-								type="text"
+								type="number"
 								placeholder="Enter Zip Code"
 								onChange={(e) => setZip(e.target.value)}
 								value={zip}

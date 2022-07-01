@@ -219,7 +219,7 @@ const Landing = () => {
 							</p>
 							<p>Humidity: {weath.daily[0].humidity}%</p>
 							<div className="rain">
-								<p>{weath.daily[0].pop}%</p>
+								<p>{weath.daily[0].pop * 100}%</p>
 								<img src={rainDrop} alt="" />
 								{weath.daily[0].rain ? (
 									<p>

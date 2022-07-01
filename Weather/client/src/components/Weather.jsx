@@ -14,6 +14,7 @@ const Weather = () => {
 		graphData,
 		uv,
 		airQual,
+		adjust
 	} = useContext(AppContext);
 	Chart.register(ChartDataLabels);
 	Chart.register(...registerables);
@@ -26,7 +27,7 @@ const Weather = () => {
 			const data = {
 				labels: graphData
 					.slice(0, 8)
-					.map((graph) => dayjs(graph.dt * 1000).format("h A")),
+					.map((graph) => dayjs(graph.dt * 1000).add(adjust, "hour").format("h A")),
 				datasets: [
 					{
 						label: "Temp",
@@ -131,7 +132,7 @@ const Weather = () => {
 									<p>Air Quality</p>
 								</div>
 								<div className="small-box-right-right">
-									<p>{weath.hourly[0].pop}%</p>
+									<p>{weath.hourly[0].pop * 100}%</p>
 									<p>{weath.current.humidity}%</p>
 									<p>{weath.current.visibility} m</p>
 									<p>{weath.current.clouds}%</p>
@@ -165,10 +166,10 @@ const Weather = () => {
 								{checked ? "°F" : "°C"}
 							</p>
 							<p>
-								{weath.daily[0].pop}%{" "}
+								{weath.daily[0].pop * 100}%{" "}
 								<img src={rainDrop} alt="" />{" "}
 								{weath.daily[0].rain
-									? `${weath.daily[0].rain} in`
+									? `${(weath.daily[0].rain / 25.4).toFixed(2)} in`
 									: null}
 							</p>
 							<p>{weath.daily[0].weather[0].description}</p>
@@ -188,10 +189,10 @@ const Weather = () => {
 								{checked ? "°F" : "°C"}
 							</p>
 							<p>
-								{weath.daily[1].pop}%{" "}
+								{weath.daily[1].pop * 100}%{" "}
 								<img src={rainDrop} alt="" />{" "}
 								{weath.daily[1].rain
-									? `${weath.daily[1].rain} in`
+									? `${(weath.daily[1].rain / 25.4).toFixed(2)} in`
 									: null}
 							</p>
 							<p>{weath.daily[1].weather[0].description}</p>

@@ -4,7 +4,7 @@ import Landing from "./components/Landing";
 import Recent from "./components/Recent";
 import Error from "./components/Error";
 import { useState, createContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import WeatherBar from "./components/WeatherBar";
 import Weather from "./components/Weather";
 import Hourly from "./components/Hourly";
@@ -91,13 +91,13 @@ function App() {
 						<Route path="*" element={<Error />} />
 						<Route path="weather" element={<WeatherBar />}>
 							<Route
-								path="current/:acity"
+								path="current/:acity/:alat/:alon"
 								element={<Weather />}
 							/>
 							<Route path="*" element={<Error />} />
-							<Route path="hourly/:acity" element={<Hourly />} />
+							<Route path="hourly/:acity/:alat/:alon" element={<Hourly />} />
 							<Route
-								path="forecast/:acity"
+								path="forecast/:acity/:alat/:alon"
 								element={<Forecast />}
 							/>
 						</Route>

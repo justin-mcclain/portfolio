@@ -67,10 +67,10 @@ const Hourly = () => {
 													{hour.feels_like.toFixed()}
 													{checked ? "°F" : "°C"}
 												</td>
-												<td>{hour.pop} %</td>
+												<td>{hour.pop * 100} %</td>
 												{hour.rainy ? (
 													<td>
-														{hour.rain["1h"]} in
+														{(hour.rain["1h"] / 25.4).toFixed(2)} in
 													</td>
 												) : (
 													<td>0 in</td>
@@ -116,10 +116,10 @@ const Hourly = () => {
 										</p>
 										<p>
 											<img src={rainDrop} alt="" />{" "}
-											{hour.pop} %
+											{hour.pop * 100} %
 										</p>
 									</div>
-									<div className="expand-content">
+									{/* <div className="expand-content">
 										<svg
 											className="icon-chevron  arrow js-dropdown-toggle"
 											xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ const Hourly = () => {
 											</title>
 											<path d="M10 .969L9.037 0 5 4.063.963 0 0 .969 5 6z"></path>
 										</svg>
-									</div>
+									</div> */}
 								</div>
 								<div className="extra-content">
 									<div className="extra-content-left">
