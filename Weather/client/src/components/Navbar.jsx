@@ -27,6 +27,7 @@ const Navbar = () => {
     }
 	const hasLetters = /[a-z]/i;
 	const zipHandler = async (e, zip) => {
+		e.target[0].blur()
 		e.preventDefault();
 		const findDupe = (arr) => {
 			for (var i = 0; i < arr.length; i++) {
