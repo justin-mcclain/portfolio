@@ -1,3 +1,5 @@
 /Weather/client/.env
 /finance/.env
 /weatherApp/.env
+
+*/test/*
