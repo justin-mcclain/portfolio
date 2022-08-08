@@ -67,7 +67,7 @@ const Hourly = () => {
 													{hour.feels_like.toFixed()}
 													{checked ? "°F" : "°C"}
 												</td>
-												<td>{hour.pop * 100} %</td>
+												<td>{(hour.pop * 100).toFixed()} %</td>
 												{hour.rainy ? (
 													<td>
 														{(hour.rain["1h"] / 25.4).toFixed(2)} in
@@ -116,7 +116,7 @@ const Hourly = () => {
 										</p>
 										<p>
 											<img src={rainDrop} alt="" />{" "}
-											{hour.pop * 100} %
+											{(hour.pop * 100).toFixed()} %
 										</p>
 									</div>
 									{/* <div className="expand-content">
