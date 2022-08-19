@@ -5,13 +5,13 @@ import {
 	TouchableOpacity,
 	ScrollView,
 	RefreshControl,
+	Image,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../App";
 import { Icon } from "@rneui/themed";
 import { Swipeable } from "react-native-gesture-handler";
-import { BottomTabBarHeightCallbackContext } from "@react-navigation/bottom-tabs";
 
 const Favorites = ({ navigation }) => {
 	const {
@@ -54,6 +54,7 @@ const Favorites = ({ navigation }) => {
 		await AsyncStorage.setItem("@storage_Key", JSON.stringify(parsedData));
 		setSearched(!searched);
 		console.log("REMOVED ITEM");
+        rightSwipe.close();
 	};
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
@@ -127,6 +128,7 @@ const Favorites = ({ navigation }) => {
 															style={{
 																fontStyle:
 																	"italic",
+																fontSize: 12,
 															}}>
 															{Math.sign(
 																city.lat
@@ -177,18 +179,34 @@ const Favorites = ({ navigation }) => {
 											<View
 												style={{
 													alignItems: "center",
+                                                    flexDirection: 'row'
 												}}>
-												<Text
-													style={{
-														fontSize: 30,
-														marginBottom: 5,
-													}}>
-													{city.temp}°
-													{checked ? "F" : "C"}
-												</Text>
-												<Text style={{ fontSize: 12 }}>
-													Feels like {city.feels}
-												</Text>
+												<View>
+													<Image
+														style={{
+															height: 60,
+															width: 60,
+															resizeMode: "cover",
+															flex: 1,
+														}}
+														source={{
+															uri: `http://openweathermap.org/img/wn/${city.icon}@4x.png`,
+														}}
+													/>
+												</View>
+												<View>
+                                                    <Text
+                                                        style={{
+                                                            fontSize: 30,
+                                                            marginBottom: 5,
+                                                        }}>
+                                                        {city.temp}°
+                                                        {checked ? "F" : "C"}
+                                                    </Text>
+                                                    <Text style={{ fontSize: 12 }}>
+                                                        Feels like {city.feels}
+                                                    </Text>
+                                                </View>
 											</View>
 										</View>
 									</TouchableOpacity>

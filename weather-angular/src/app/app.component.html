@@ -1,0 +1,41 @@
+<nav>
+  <div class="navbarcontent">
+    <div class="nav_left">
+      <a href="/"><img src="../assets/logo.png" alt="" /></a>
+      <form>
+        <input
+          type="number"
+          name="newZip"
+          id="newZip"
+          [(ngModel)]="newZip"
+          (change)="search(newZip)"
+          placeholder="Enter Zip Code"
+        />
+        <!-- <button type="submit" (click)="search(newZip)">ayyyyyyngular</button> -->
+      </form>
+    </div>
+    <div class="nav_right">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/justin-mcclain/portfolio/tree/main/Weather/client"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a href="/sources">External Sources</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet> </router-outlet>
+</div>

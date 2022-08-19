@@ -4,7 +4,6 @@ import {
 	View,
 	Image,
 	TextInput,
-	Switch,
 	Keyboard,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
@@ -13,6 +12,8 @@ import { AppContext } from "../App";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Switch } from "react-native-switch";
+import GetLocation from 'react-native-get-location'
 
 const header = ({ navigation }) => {
 	const toggleSwitch = () => setChecked((previousState) => !previousState);
@@ -46,6 +47,12 @@ const header = ({ navigation }) => {
 		setFav,
 		refreshing,
 		setRefreshing,
+		setLowValue,
+		setHighValue,
+		lowValue,
+		highValue,
+		setAirQual,
+		setUv,
 	} = useContext(AppContext);
 	const zipHandler = async (zip) => {
 		const zipResponse = await axios
@@ -77,6 +84,9 @@ const header = ({ navigation }) => {
 				`https://api.openweathermap.org/data/2.5/onecall?lat=${newZip.lat}&lon=${newZip.lon}&exclude=minutely&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
 			);
 			setWeath(theWeather.data);
+			const theAir = await axios.get(
+				`http://api.openweathermap.org/data/2.5/air_pollution?lat=${newZip.lat}&lon=${newZip.lon}&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+			);
 			const theCity = await axios.get(
 				`http://api.openweathermap.org/geo/1.0/reverse?lat=${newZip.lat}&lon=${newZip.lon}&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
 			);
@@ -111,8 +121,36 @@ const header = ({ navigation }) => {
 					temp: Number(graph.temp.toFixed()),
 				})
 			);
+			if (theAir.data.list[0].main.aqi === 1) {
+				setAirQual("Good");
+			} else if (theAir.data.list[0].main.aqi === 2) {
+				setAirQual("Fair");
+			} else if (theAir.data.list[0].main.aqi === 3) {
+				setAirQual("Moderate");
+			} else if (theAir.data.list[0].main.aqi === 4) {
+				setAirQual("Poor");
+			} else if (theAir.data.list[0].main.aqi === 5) {
+				setAirQual("Very Poor");
+			}
+			if (theWeather.data.daily[0].uvi < 3) {
+				setUv("Low");
+				// setUvColor("#67BE4D");
+			} else if (theWeather.data.daily[0].uvi < 6) {
+				setUv("Moderate");
+				// setUvColor("#FCBD22");
+			} else if (theWeather.data.daily[0].uvi < 8) {
+				setUv("High");
+				// setUvColor("#F66B34");
+			} else if (theWeather.data.daily[0].uvi > 7) {
+				setUv("Very High") && setUvColor("#FF0000");
+			}
 			setAreaData(theAreaData);
+			let range = theAreaData.sort((a, b) => a.temp - b.temp);
+			setLowValue(range[0].temp);
+			setHighValue(range[range.length - 1].temp);
 			console.log("theAreaData set");
+			console.log(lowValue);
+			console.log(highValue);
 		} else {
 			const theWeather = await axios
 				.get(
@@ -122,6 +160,13 @@ const header = ({ navigation }) => {
 					console.log(err);
 				});
 			setWeath(theWeather.data);
+			const theAir = await axios
+				.get(
+					`http://api.openweathermap.org/data/2.5/air_pollution?lat=41.8721&lon=-87.6578&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
+				)
+				.catch((err) => {
+					console.log(err);
+				});
 			const theCity = await axios
 				.get(
 					`http://api.openweathermap.org/geo/1.0/reverse?lat=41.8721&lon=-87.6578&limit=5&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
@@ -160,8 +205,34 @@ const header = ({ navigation }) => {
 					temp: Number(graph.temp.toFixed()),
 				})
 			);
+			if (theAir.data.list[0].main.aqi === 1) {
+				setAirQual("Good");
+			} else if (theAir.data.list[0].main.aqi === 2) {
+				setAirQual("Fair");
+			} else if (theAir.data.list[0].main.aqi === 3) {
+				setAirQual("Moderate");
+			} else if (theAir.data.list[0].main.aqi === 4) {
+				setAirQual("Poor");
+			} else if (theAir.data.list[0].main.aqi === 5) {
+				setAirQual("Very Poor");
+			}
+			if (theWeather.data.daily[0].uvi < 3) {
+				setUv("Low");
+				// setUvColor("#67BE4D");
+			} else if (theWeather.data.daily[0].uvi < 6) {
+				setUv("Moderate");
+				// setUvColor("#FCBD22");
+			} else if (theWeather.data.daily[0].uvi < 8) {
+				setUv("High");
+				// setUvColor("#F66B34");
+			} else if (theWeather.data.daily[0].uvi > 7) {
+				setUv("Very High") && setUvColor("#FF0000");
+			}
 			setAreaData(theAreaData);
-			console.log("theAreaData set");
+			let range = theAreaData.sort((a, b) => a.temp - b.temp);
+			setLowValue(range[0].temp);
+			setHighValue(range[range.length - 1].temp);
+			console.log(range[0]);
 		}
 	};
 	const getData = async () => {
@@ -180,12 +251,23 @@ const header = ({ navigation }) => {
 				...city,
 				temp: finalData[index].data.current.temp.toFixed(),
 				feels: finalData[index].data.current.feels_like.toFixed(),
+				icon: finalData[index].data.current.weather[0].icon
 			}));
-			console.log(addTemp, "DID WE DO IT?");
+			GetLocation.getCurrentPosition({
+				enableHighAccuracy: true
+			})
+			.then(location => {
+				console.log(location, "THIS IS WHERE I AM");
+			})
+			.catch(error => {
+				const { code, message } = error;
+				console.warn(code, message,"PROBLEM");
+			})
 			return jsonValue != null ? setFav(addTemp) : null;
 		} catch (e) {
 			console.log(e);
 		}
+	
 	};
 	useEffect(() => {
 		getWeather();
@@ -200,12 +282,15 @@ const header = ({ navigation }) => {
 					source={require("../assets/logo.png")}
 					style={{ width: 60, height: 60 }}
 				/>
-				<Text style={{ color: "white", fontSize: 30 }}>test</Text>
+				<Text style={{ color: "white", fontSize: 30 }}>Tab Name</Text>
 				<Switch
-					ios_backgroundColor={"#0d8af5"}
-					trackColor={{ false: "#0d8af5", true: "#f2663c" }}
 					onValueChange={toggleSwitch}
 					value={checked}
+					activeText={"°F"}
+					inActiveText={"°C"}
+					backgroundActive={"#f2663c"}
+					backgroundInactive={"#0d8af5"}
+					circleActiveColor={"white"}
 				/>
 			</View>
 			<View>
@@ -227,19 +312,19 @@ const header = ({ navigation }) => {
 				/>
 			</View>
 			{/* <View>
-				<TouchableOpacity onPress={() => getData()}>
+				<TouchableOpacity onPress={() => tester()}>
 					<Text style={{ fontSize: 40, color: "white" }}>
 						GET DATA YO
 					</Text>
 				</TouchableOpacity>
 			</View> */}
-			<View>
+			{/* <View>
 				<TouchableOpacity onPress={() => console.log(fav)}>
 					<Text style={{ fontSize: 40, color: "white" }}>
 						SHOW ME FAV
 					</Text>
 				</TouchableOpacity>
-			</View>
+			</View> */}
 			{/* <View>
 				<TouchableOpacity onPress={() => clearAll()}>
 					<Text style={{ fontSize: 40, color: "white" }}>

@@ -15,9 +15,8 @@ import {
 	VictoryAxis,
 	VictoryContainer,
 } from "victory-native";
-import { Icon } from "@rneui/themed";
+import { Icon, Divider } from "@rneui/themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { removeItem } from "./Favorites";
 
 const Body = ({ navigation }) => {
 	const {
@@ -39,11 +38,13 @@ const Body = ({ navigation }) => {
 		newZip,
 		refreshing,
 		setRefreshing,
+		lowValue,
+		highValue,
 	} = useContext(AppContext);
 	const dayjs = require("dayjs");
 	var advancedFormat = require("dayjs/plugin/advancedFormat");
 	dayjs.extend(advancedFormat);
-    const removeItem = async (index) => {
+	const removeItem = async (index) => {
 		const currentData = await AsyncStorage.getItem("@storage_Key");
 		const parsedData = JSON.parse(currentData);
 		parsedData.splice(index, 1);
@@ -51,19 +52,11 @@ const Body = ({ navigation }) => {
 		setSearched(!searched);
 		console.log("REMOVED ITEM");
 	};
-	const getData = async () => {
-		try {
-			const jsonValue = await AsyncStorage.getItem("@storage_Key");
-			return jsonValue != null ? JSON.parse(jsonValue) : null;
-		} catch (e) {
-			console.log(e);
-		}
-	};
 	const storeData = async (value) => {
 		if (fav.some((city) => city.zip === newZip.zip)) {
-            let index = fav.findIndex((city) => city.zip === newZip.zip)
-            removeItem(index);
-            setSearched(!searched)
+			let index = fav.findIndex((city) => city.zip === newZip.zip);
+			removeItem(index);
+			setSearched(!searched);
 		} else {
 			try {
 				const currentData = await AsyncStorage.getItem("@storage_Key");
@@ -103,10 +96,6 @@ const Body = ({ navigation }) => {
 		}
 		console.log("Done.");
 	};
-	const test = () => {
-		let hello = fav.some((city) => city.zip === newZip.zip);
-		console.log(hello, "THIS IS MY TEST", newZip.zip);
-	};
 	useEffect(() => {
 		console.log("WHAT THE FUCK");
 	}, [searched]);
@@ -116,29 +105,135 @@ const Body = ({ navigation }) => {
 				{loaded ? (
 					<>
 						<View style={styles.content}>
-							<Text style={{ textAlign: "center", fontSize: 70 }}>
+							<Text style={{ textAlign: "center", fontSize: 55 }}>
 								{weathLoc.name}
 							</Text>
-							<Text style={{ fontSize: 28 }}>
-								{weath.current.temp.toFixed()}°
-							</Text>
-							<Image
-								style={{ height: 200, width: 200 }}
-								source={{
-									uri: `http://openweathermap.org/img/wn/${weath.current.weather[0].icon}@4x.png`,
-								}}
-							/>
-							<Text
+							<View
 								style={{
-									textTransform: "capitalize",
-									fontSize: 20,
+									flexDirection: "row",
+									paddingHorizontal: 75,
+									justifyContent: "space-evenly",
+									alignItems: "center",
+									height: 150,
+									width: "100%",
 								}}>
-								{weath.current.weather[0].description}
-							</Text>
-						</View>
-						<View style={styles.content}>
-							<Text>Add to Favorites</Text>
+								<View
+									style={{
+										justifyContent: "space-between",
+										height: 150,
+										alignItems: "center",
+										width: "100%",
+									}}>
+									<Text
+										style={{ fontSize: 67, marginTop: 33 }}>
+										{weath.current.temp.toFixed()}°
+									</Text>
+									<Text style={{ fontSize: 20 }}>
+										Feels like{" "}
+										{weath.current.feels_like.toFixed()}°
+									</Text>
+								</View>
+								<View
+									style={{
+										height: 150,
+										alignItems: "center",
+                                        width: "100%"
+									}}>
+									<Image
+										style={{
+											height: 150,
+											width: 150,
+											resizeMode: "cover",
+											flex: 1,
+										}}
+										source={{
+											uri: `http://openweathermap.org/img/wn/${weath.current.weather[0].icon}@4x.png`,
+										}}
+									/>
+									<Text
+										style={{
+											textTransform: "capitalize",
+											fontSize: 20,
+										}}>
+										{weath.current.weather[0].description}
+									</Text>
+								</View>
+							</View>
+							<Divider
+								style={{ width: "85%", margin: 20 }}
+								color="#f2663c"
+								insetType="left"
+								subHeaderStyle={{}}
+								width={1}
+								orientation="horizontal"
+							/>
+							<View
+								style={{
+									flexDirection: "row",
+									justifyContent: "space-evenly",
+									width: "100%",
+								}}>
+								<View>
+									<Text style={{ fontSize: 18 }}>
+										Precipitation:
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										Humidity:
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										Visibility:
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										Clouds:
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										Dew Point:
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										UV Index:
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										Air Quality:
+									</Text>
+								</View>
+								<View>
+									<Text style={{ fontSize: 18 }}>
+										{(weath.hourly[0].pop * 100).toFixed()}%
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										{weath.current.humidity}%
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										{weath.current.visibility} m
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										{weath.current.clouds}%
+									</Text>
+									<Text style={{ fontSize: 18 }}>
+										{weath.current.dew_point.toFixed()}
+										{checked ? "°F" : "°C"}
+									</Text>
+									<Text style={{ fontSize: 18 }}>{uv}</Text>
+									<Text style={{ fontSize: 18 }}>
+										{airQual}
+									</Text>
+								</View>
+							</View>
+							<Divider
+								style={{ width: "85%", margin: 20 }}
+								color="#f2663c"
+								insetType="left"
+								subHeaderStyle={{}}
+								width={1}
+								orientation="horizontal"
+								subHeader={
+									fav.some((city) => city.zip === newZip.zip)
+										? "Remove from Favorites"
+										: "Add to Favorites"
+								}
+							/>
 							<TouchableOpacity
+								style={{ marginTop: 5 }}
 								onPress={() =>
 									storeData({
 										city: newZip.name,
@@ -162,13 +257,13 @@ const Body = ({ navigation }) => {
 								/>
 							</TouchableOpacity>
 						</View>
-						<View>
+						{/* <View>
 							<TouchableOpacity onPress={() => test()}>
 								<Text style={{ fontSize: 40 }}>
 									TEST SOME STUFF
 								</Text>
 							</TouchableOpacity>
-						</View>
+						</View> */}
 						{/* <View>
 							<TouchableOpacity onPress={() => console.log(fav)}>
 								<Text style={{ fontSize: 40 }}>
@@ -177,10 +272,12 @@ const Body = ({ navigation }) => {
 							</TouchableOpacity>
 						</View> */}
 						<View style={styles.content}>
-							<Text style={{ fontSize: 28 }}>Temperature</Text>
+							<Text style={{ fontSize: 40 }}>Temperature</Text>
 							<VictoryChart
 								domainPadding={{ x: 7, y: 40 }}
-								height={200}>
+								height={200}
+								maxDomain={{ y: highValue + 10 }}
+								minDomain={{ y: lowValue - 3 }}>
 								<VictoryArea
 									interpolation="natural"
 									style={{
@@ -233,6 +330,11 @@ const styles = StyleSheet.create({
 		shadowColor: "black",
 		shadowOffset: { width: -2, height: 4 },
 		shadowOpacity: 0.2,
+	},
+	weatherIcon: {
+		justifyContent: "space-between",
+		height: 150,
+		alignItems: "center",
 	},
 });
 

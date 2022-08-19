@@ -57,6 +57,8 @@ export default function App() {
 	const [newZip, setNewZip] = useState([]);
 	const [fav, setFav] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
+	const [lowValue, setLowValue] = useState();
+	const [highValue, setHighValue] = useState();
 	function getHeaderTitle(route) {
 		const routeName = getFocusedRouteNameFromRoute(route) ?? "TODAY";
 		switch (routeName) {
@@ -121,7 +123,11 @@ export default function App() {
 					fav,
 					setFav,
 					refreshing,
-					setRefreshing
+					setRefreshing,
+					lowValue,
+					setLowValue,
+					highValue,
+					setHighValue
 				}}>
 				<SafeAreaView style={{ flex: 1, backgroundColor: "#1e2023" }}>
 					<StatusBar style="auto" />

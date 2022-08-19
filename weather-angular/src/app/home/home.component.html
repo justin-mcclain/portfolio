@@ -1,0 +1,26 @@
+<div class="weatherbar">
+  <div class="weatherheader">
+    <div class="weatherheadercontent">
+      <h2>{{ cityData[0].name }}, {{ cityData[0].state }}</h2>
+      <p>
+        {{ cityData[0].lat.toFixed(2) }}
+        {{ cityData[0].lat > 0 ? "°N" : "°S" }},
+        {{ cityData[0].lon.toFixed(2) }}
+        {{ cityData[0].lon > 0 ? "°E" : "°W" }}
+      </p>
+    </div>
+    <div class="weatheroptions">
+      <ul>
+        <li>
+          <a href="/">TODAY</a>
+        </li>
+        <li>
+          <a href="/">HOURLY</a>
+        </li>
+        <li>
+          <a href="/">8-DAY</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
