@@ -19,9 +19,9 @@ export class DataService {
     );
   }
 
-  getHourData() {
+  getHourData(lat: string, lon: string) {
     return this.http.get(
-      'https://api.openweathermap.org/data/2.5/onecall?lat=41.8721&lon=-87.6578&exclude=minutely,current,daily,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09'
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,current,daily,alerts&units=imperial&appid=9ce1a7cb8abfdaed2fdb4b805a138c09`
     );
   }
 

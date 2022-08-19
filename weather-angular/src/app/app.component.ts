@@ -20,9 +20,6 @@ export class AppComponent implements OnInit {
     this.dataSerivce.getData().subscribe((data) => {
       this.myData = data;
     });
-    this.dataSerivce.getHourData().subscribe((data) => {
-      this.hourData = data;
-    });
   }
 
   search(zip: string): void{

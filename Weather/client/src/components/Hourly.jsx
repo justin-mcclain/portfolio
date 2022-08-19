@@ -68,7 +68,7 @@ const Hourly = () => {
 													{checked ? "°F" : "°C"}
 												</td>
 												<td>{(hour.pop * 100).toFixed()} %</td>
-												{hour.rainy ? (
+												{hour.rain ? (
 													<td>
 														{(hour.rain["1h"] / 25.4).toFixed(2)} in
 													</td>

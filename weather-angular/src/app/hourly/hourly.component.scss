@@ -1,0 +1,45 @@
+.hourly {
+	width: 900px;
+	padding: 0 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	h2 {
+		text-align: center;
+		margin: 20px;
+	}
+	.desc {
+		display: flex;
+		align-items: center;
+		text-transform: capitalize;
+	}
+	table {
+		font-size: 14px;
+		border-collapse: collapse;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		th {
+			text-align: left;
+			padding: 3px 10px;
+			height: 24px;
+			white-space: nowrap;
+		}
+		thead tr {
+			background-color: #e7e7e7;
+		}
+		tr {
+			td {
+				white-space: nowrap;
+				height: 40px;
+				padding: 3px 10px;
+			}
+		}
+		tbody tr:nth-child(even) {
+			background-color: white;
+		}
+		img {
+			width: 34px;
+			height: auto;
+		}
+	}
+}

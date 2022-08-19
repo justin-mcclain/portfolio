@@ -8,9 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BodyComponent } from './body/body.component';
 import { HourlyComponent } from './hourly/hourly.component';
+import { ForecastComponent } from './forecast/forecast.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, BodyComponent, HourlyComponent],
+  declarations: [AppComponent, HomeComponent, BodyComponent, HourlyComponent, ForecastComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
