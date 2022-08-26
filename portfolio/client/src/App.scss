@@ -118,7 +118,18 @@ nav {
 }
 
 .aboutleftcontent {
-  margin-bottom: 60px;
+  margin-bottom: 15px;
+}
+
+.resume {
+  display: flex;
+  flex-direction: column;
+  svg:hover {
+    fill: $primary;
+  }
+  .resumeicons {
+    margin-bottom: 60px;
+  }
 }
 
 .aboutright {
