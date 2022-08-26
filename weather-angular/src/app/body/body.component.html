@@ -3,94 +3,107 @@
   <h2>Current Weather</h2>
 </div>
 <div class="wrapper">
-    <div class="weather">
-      <div class="weatherleft">
-        <div class="weatherleft_box">
-          <div class="small-box-left">
-            <div class="icon">
-              <img
-                src="http://openweathermap.org/img/wn/{{
-                  weatherData.current.weather[0].icon
-                }}@4x.png"
-              />
-              <p>{{ weatherData.current.weather[0].description }}</p>
-            </div>
-            <div class="temp">
-              <div class="tempnumber">
-                <p>{{ weatherData.current.temp.toFixed() }}</p>
-              </div>
-              <div class="feelslike">
-                <p>Feels Like {{ weatherData.current.feels_like.toFixed() }}</p>
-              </div>
-            </div>
+  <div class="weather">
+    <div class="weatherleft">
+      <div class="weatherleft_box">
+        <div class="small-box-left">
+          <div class="icon">
+            <img
+              src="http://openweathermap.org/img/wn/{{
+                weatherData.current.weather[0].icon
+              }}@4x.png"
+            />
+            <p>{{ weatherData.current.weather[0].main }}</p>
           </div>
-          <div class="small-box-right">
-            <div class="small-box-right-left">
-              <p>Precipitation</p>
-              <p>Humidity</p>
-              <p>Visibility</p>
-              <p>Clouds</p>
-              <p>Dew Point</p>
-              <p>UV Index</p>
-              <p>Air Quality</p>
+          <div class="temp">
+            <div class="tempnumber">
+              <p>{{ weatherData.current.temp.toFixed() }}</p>
             </div>
-            <div class="small-box-right-right">
-              <p>{{ (weatherData.hourly[0].pop * 100).toFixed() }}%</p>
-              <p>{{ weatherData.current.humidity }}%</p>
-              <p>{{ weatherData.current.visibility }} m</p>
-              <p>{{ weatherData.current.clouds }}%</p>
-              <p>{{ weatherData.current.dew_point.toFixed() }}</p>
-              <p>{{ uv }}</p>
-              <p>test</p>
+            <div class="feelslike">
+              <p>Feels Like {{ weatherData.current.feels_like.toFixed() }}</p>
             </div>
           </div>
         </div>
-        <div class="weatherleft_box">
-          <div class="chartheader">Temperature</div>
-          <!-- <div class="chart">{displayChart()}</div> -->
+        <div class="small-box-right">
+          <div class="small-box-right-left">
+            <p>Precipitation</p>
+            <p>Humidity</p>
+            <p>Visibility</p>
+            <p>Clouds</p>
+            <p>Dew Point</p>
+            <p>UV Index</p>
+            <p>Air Quality</p>
+          </div>
+          <div class="small-box-right-right">
+            <p>{{ (weatherData.hourly[0].pop * 100).toFixed() }}%</p>
+            <p>{{ weatherData.current.humidity }}%</p>
+            <p>{{ weatherData.current.visibility / 1000 }} km</p>
+            <p>{{ weatherData.current.clouds }}%</p>
+            <p>{{ weatherData.current.dew_point.toFixed() }}</p>
+            <p>{{ uv }}</p>
+            <p>{{ airQual }}</p>
+          </div>
         </div>
       </div>
-      <div class="weatherright">
-        <div class="weatherright_box">
-          <div class="weatherside-header">
-            <h4>Today</h4>
-            <p>{{ weatherData.daily[0].dt * 1000 | date: "M/dd" }}</p>
+      <div class="weatherleft_box">
+        <div class="chartheader">Temperature</div>
+        <div class="flex-item">
+          <div style="display: block">
+            <canvas
+              baseChart
+              width="490"
+              height="175"
+              [data]="lineChartData"
+              [options]="lineChartOptions"
+              [type]="lineChartType"
+            ></canvas>
           </div>
-          <p>
-            {{ weatherData.daily[0].temp.max.toFixed() }} |
-            {{ weatherData.daily[0].temp.min.toFixed() }}
-          </p>
-          <p>
-            {{ (weatherData.daily[0].pop * 100).toFixed() }}%
-            <img src="../../assets/waterdrop.svg" alt="" />
-            {{
-              weatherData.daily[0].rain
-                ? (weatherData.daily[0].rain / 25.4).toFixed(2) + " inches"
-                : null
-            }}
-          </p>
-          <p>{{ weatherData.daily[0].weather[0].description }}</p>
-        </div>
-        <div class="weatherright_box">
-          <div class="weatherside-header">
-            <h4>Tomorrow</h4>
-            <p>{{ weatherData.daily[1].dt * 1000 | date: "M/dd" }}</p>
-          </div>
-          <p>
-            {{ weatherData.daily[1].temp.max.toFixed() }} |
-            {{ weatherData.daily[1].temp.min.toFixed() }}
-          </p>
-          <p>
-            {{ (weatherData.daily[1].pop * 100).toFixed() }}%
-            <img src="../../assets/waterdrop.svg" alt="" />
-            {{
-              weatherData.daily[1].rain
-                ? (weatherData.daily[1].rain / 25.4).toFixed(2) + " inches"
-                : null
-            }}
-          </p>
-          <p>{{ weatherData.daily[1].weather[0].description }}</p>
         </div>
       </div>
     </div>
+    <div class="weatherright">
+      <div class="weatherright_box">
+        <div class="weatherside-header">
+          <h4>Today</h4>
+          <p>{{ weatherData.daily[0].dt * 1000 | date: "M/dd" }}</p>
+        </div>
+        <p>
+          {{ weatherData.daily[0].temp.max.toFixed() }} |
+          {{ weatherData.daily[0].temp.min.toFixed() }}
+        </p>
+        <p>
+          {{ (weatherData.daily[0].pop * 100).toFixed() }}%
+          <img src="../../assets/waterdrop.svg" alt="" />
+          {{
+            weatherData.daily[0].rain
+              ? (weatherData.daily[0].rain / 25.4).toFixed(2) + " inches"
+              : null
+          }}
+        </p>
+        <p>{{ weatherData.daily[0].weather[0].description }}</p>
+      </div>
+      <div class="weatherright_box">
+        <div class="weatherside-header">
+          <h4>Tomorrow</h4>
+          <p>{{ weatherData.daily[1].dt * 1000 | date: "M/dd" }}</p>
+        </div>
+        <p>
+          {{ weatherData.daily[1].temp.max.toFixed() }} |
+          {{ weatherData.daily[1].temp.min.toFixed() }}
+        </p>
+        <p>
+          {{ (weatherData.daily[1].pop * 100).toFixed() }}%
+          <img src="../../assets/waterdrop.svg" alt="" />
+          {{
+            weatherData.daily[1].rain
+              ? (weatherData.daily[1].rain / 25.4).toFixed(2) + " inches"
+              : null
+          }}
+        </p>
+        <p>{{ weatherData.daily[1].weather[0].description }}</p>
+      </div>
+    </div>
+  </div>
 </div>
+
+asdfasdf {{ tempData[2] }} {{ timeData[2] }}

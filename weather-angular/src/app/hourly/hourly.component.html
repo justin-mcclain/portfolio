@@ -3,49 +3,49 @@
   <h2>Hourly Forecast</h2>
 </div>
 <div class="wrapper">
-    <div class="hourly">
-      <table>
-        <thead class="rowgroup">
-          <tr>
-            <th>Time</th>
-            <th>Conditions</th>
-            <th>Temp</th>
-            <th>Feels Like</th>
-            <th>Precip</th>
-            <th>Amount</th>
-            <th>Cloud Cover</th>
-            <th>Dew Point</th>
-            <th>Humidity</th>
-            <th>Wind</th>
-          </tr>
-        </thead>
-        <tbody class="rowgroup">
-          <tr *ngFor="let hour of hourData.hourly; index as i">
-            <td>timestamp</td>
-            <td class="desc">
-              <img
-                src="http://openweathermap.org/img/wn/{{
-                  hour.weather[0].icon
-                }}.png"
-              />
-              {{ hour.weather[0].description }}
-            </td>
-            <td>{{ hour.temp.toFixed() }}</td>
-            <td>{{ hour.feels_like.toFixed() }}</td>
-            <td>{{ (hour.pop * 100).toFixed() }} %</td>
-            <td>
-              {{  hour.rain ?
-            (hour.rain["1h"] / 25.4).toFixed(2)
-              + "in"  : "0 in" }}
-            </td>
-            <td>{{ hour.clouds }}%</td>
-            <td>{{ hour.dew_point.toFixed() }}</td>
-            <td>{{ hour.humidity }}%</td>
-            <td>
-              {{ hour.wind_speed.toFixed() }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="hourly">
+    <table>
+      <thead class="rowgroup">
+        <tr>
+          <th>Time</th>
+          <th>Conditions</th>
+          <th>Temp</th>
+          <th>Feels Like</th>
+          <th>Precip</th>
+          <th>Amount</th>
+          <th>Cloud Cover</th>
+          <th>Dew Point</th>
+          <th>Humidity</th>
+          <th>Wind</th>
+        </tr>
+      </thead>
+      <tbody class="rowgroup">
+        <tr *ngFor="let hour of slicedHourData; index as i">
+          <td>{{ (hour.dt - adjust) * 1000 | date: "h:mm a" }}</td>
+          <td class="desc">
+            <img
+              src="http://openweathermap.org/img/wn/{{
+                hour.weather[0].icon
+              }}.png"
+            />
+            {{ hour.weather[0].description }}
+          </td>
+          <td>{{ hour.temp.toFixed() }}</td>
+          <td>{{ hour.feels_like.toFixed() }}</td>
+          <td>{{ (hour.pop * 100).toFixed() }} %</td>
+          <td>
+            {{
+              hour.rain ? (hour.rain["1h"] / 25.4).toFixed(2) + "in" : "0 in"
+            }}
+          </td>
+          <td>{{ hour.clouds }}%</td>
+          <td>{{ hour.dew_point.toFixed() }}</td>
+          <td>{{ hour.humidity }}%</td>
+          <td>
+            {{ hour.wind_speed.toFixed() }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

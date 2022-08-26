@@ -1,1 +1,28 @@
-<p>forecast works!</p>
+<app-home></app-home>
+<div class="wrapper">
+  <div class="header">
+    <h2>8-Day Forecast</h2>
+  </div>
+  <div class="forecast">
+    <div *ngFor="let day of weeklyData.daily; index as i" class="daycast">
+      <h3>{{ day.dt * 1000 | date: "E L/d" }}</h3>
+      <div class="daycasttemps">
+        <p>{{ day.temp.max.toFixed() }}°</p>
+        &nbsp;|&nbsp;
+        <p>{{ day.temp.min.toFixed() }}°</p>
+      </div>
+      <img
+        src="http://openweathermap.org/img/wn/{{
+          day.weather[0].icon
+        }}@4x.png"
+        alt=""
+      />
+      <p>{{ day.weather[0].description }}</p>
+      <div class="rain">
+        <p>{{ (day.pop * 100).toFixed() }}%</p>
+        <img src="../../assets/waterdrop.svg" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+    

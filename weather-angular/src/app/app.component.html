@@ -11,8 +11,8 @@
           (change)="search(newZip)"
           placeholder="Enter Zip Code"
         />
-        <!-- <button type="submit" (click)="search(newZip)">ayyyyyyngular</button> -->
       </form>
+      <!-- <mat-slide-toggle color="primary"></mat-slide-toggle> -->
     </div>
     <div class="nav_right">
       <ul>
@@ -35,7 +35,19 @@
     </div>
   </div>
 </nav>
-
+<div class="recents">
+  <div class="recentcities">
+    <p>Recent Cities:</p>
+    <ul>
+      <li *ngFor="let city of namedCityList">
+        <a href="/weather/current/{{ city.name }}/{{ city.lat }}/{{ city.lon }}"
+          >{{ city.name }}, {{ city.state }}</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
 <div class="container">
   <router-outlet> </router-outlet>
 </div>
+
