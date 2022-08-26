@@ -31,7 +31,7 @@ const Forecast = () => {
 							/>
 							<p>{day.weather[0].description}</p>
                             <div className="rain">
-								<p>{day.pop * 100}%</p>
+								<p>{(day.pop * 100).toFixed()}%</p>
 								<img src={rainDrop} alt="" />
 								{day.rain ? (
 									<p>

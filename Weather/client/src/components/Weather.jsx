@@ -132,7 +132,7 @@ const Weather = () => {
 									<p>Air Quality</p>
 								</div>
 								<div className="small-box-right-right">
-									<p>{weath.hourly[0].pop * 100}%</p>
+									<p>{(weath.hourly[0].pop * 100).toFixed()}%</p>
 									<p>{weath.current.humidity}%</p>
 									<p>{weath.current.visibility} m</p>
 									<p>{weath.current.clouds}%</p>
@@ -166,7 +166,7 @@ const Weather = () => {
 								{checked ? "°F" : "°C"}
 							</p>
 							<p>
-								{weath.daily[0].pop * 100}%{" "}
+								{(weath.daily[0].pop * 100).toFixed()}%{" "}
 								<img src={rainDrop} alt="" />{" "}
 								{weath.daily[0].rain
 									? `${(weath.daily[0].rain / 25.4).toFixed(2)} in`
@@ -189,7 +189,7 @@ const Weather = () => {
 								{checked ? "°F" : "°C"}
 							</p>
 							<p>
-								{weath.daily[1].pop * 100}%{" "}
+								{(weath.daily[1].pop * 100).toFixed()}%{" "}
 								<img src={rainDrop} alt="" />{" "}
 								{weath.daily[1].rain
 									? `${(weath.daily[1].rain / 25.4).toFixed(2)} in`

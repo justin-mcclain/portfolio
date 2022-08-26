@@ -1,0 +1,122 @@
+.weather {
+	padding: 0 10px;
+	display: flex;
+	gap: 10px;
+	.weatherleft,
+	.weatherright {
+		display: flex;
+		flex-direction: column;
+	}
+	.weatherleft_box {
+		position: relative;
+		display: flex;
+		padding: 10px;
+		width: 520px;
+		height: auto;
+		background-color: white;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		margin-bottom: 10px;
+		gap: 10px;
+		img {
+			width: 120px;
+			height: 120px;
+		}
+		.icon {
+			flex: 1 1 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+            p {
+                text-transform: capitalize;
+				text-align: center;
+            }
+		}
+		.temp {
+			flex: 1 1 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: 140px;
+			justify-content: space-between;
+			.tempnumber {
+				padding-top: 10px;
+				display: flex;
+				p {
+					font-size: 65px;
+				}
+				p::after {
+					position: relative;
+					top: -30px;
+					font-size: 18px;
+					content: "\00b0";
+				}
+			}
+			.feelslike {
+				p {
+					font-style: italic;
+					font-size: 12px;
+				}
+			}
+		}
+	}
+	.weatherright_box {
+		padding: 10px;
+		width: 150px;
+		height: 150px;
+		background-color: white;
+		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+		margin-bottom: 10px;
+		p {
+			text-transform: capitalize;
+			font-size: 14px;
+			line-height: 25px;
+		}
+		h4 {
+			margin-bottom: 20px;
+			font-weight: 500;
+		}
+		img {
+			filter: invert(38%) sepia(87%) saturate(2289%) hue-rotate(189deg)
+				brightness(99%) contrast(94%);
+			width: 12px;
+			height: auto;
+		}
+	}
+	.small-box-left {
+		flex: 1;
+		display: flex;
+		// flex-direction: column;
+		align-items: center;
+		justify-content: stretch;
+	}
+	.small-box-right {
+		display: flex;
+		flex: 1;
+		gap: 60px;
+		align-items: center;
+		.small-box-right-left,
+		.small-box-right-right {
+			font-size: 14px;
+			line-height: 24px;
+		}
+	}
+	.weatherside-header {
+		display: flex;
+		justify-content: space-between;
+		align-content: center;
+		p:first-child {
+			line-height: normal;
+			font-size: 16px;
+		}
+	}
+	.weatherleft_box:nth-child(2) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.chart {
+			width: 100%;
+			margin-top: 25px;
+			margin-bottom: 10px;
+		}
+	}
+}

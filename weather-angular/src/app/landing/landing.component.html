@@ -1,0 +1,83 @@
+<div class="landing">
+  <div class="landheader">
+    <h1>{{ cityData[0].name }}, {{ cityData[0].state }}</h1>
+  </div>
+  <div class="content">
+    <div class="current">
+      <div class="currentheader">
+        <h2>CURRENT</h2>
+        <p>{{ weatherData.current.weather[0].description }}</p>
+      </div>
+      <div class="currentinfo">
+        <div class="icon">
+          <img
+            src="http://openweathermap.org/img/wn/{{
+              weatherData.current.weather[0].icon
+            }}@4x.png"
+            alt=""
+          />
+        </div>
+        <div class="temp">
+          <div class="tempnumber">
+            <p>{{ weatherData.current.temp.toFixed() }}</p>
+          </div>
+          <p>
+            Feels like
+            {{ weatherData.current.feels_like.toFixed() }}°
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="today">
+      <h2>TODAY</h2>
+      <p>
+        {{ weatherData.dt * 1000 | date: "E L/d" }}
+      </p>
+      <p>{{ weatherData.daily[0].weather[0].description }}</p>
+      <p>
+        High:&nbsp;
+        {{ weatherData.daily[0].temp.max.toFixed() }}
+      </p>
+      <p>Humidity: {{ weatherData.daily[0].humidity }}%</p>
+      <div class="rain">
+        <p>{{ weatherData.daily[0].pop * 100 }}%</p>
+        <img src="../../assets/waterdrop.svg" alt="" />
+        <p>
+          {{
+            weatherData.daily[0].rain
+              ? (weatherData.daily[0].rain / 25.4).toFixed(2) + " inches"
+              : null
+          }}
+        </p>
+      </div>
+      <p>UV Index: {{ uv }}</p>
+    </div>
+    <!-- <div class="tonight">
+            <h2>TONIGHT</h2>
+            <p>
+                {dayjs(weath.current.dt * 1000).format(
+                    "ddd M/D"
+                )}
+            </p>
+            <p>
+                LOW
+                <span
+                    style={{
+                        color: "#0d8af5",
+                        fontWeight: "bold",
+                    }}>
+                    {weath.daily[0].temp.min.toFixed()}
+                </span>
+                °{checked ? "F" : "C"}
+            </p>
+        </div> -->
+  </div>
+  <button>
+    <a
+      href="/weather/current/{{ cityData[0].name }}/{{ weatherData.lat }}/{{
+        weatherData.lon
+      }}"
+      >Full Forecast</a
+    >
+  </button>
+</div>

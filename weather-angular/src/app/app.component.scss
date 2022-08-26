@@ -1,0 +1,101 @@
+$black: #1e2023;
+
+nav {
+	padding: 0 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 4rem;
+	width: 100vw;
+	background-color: $black;
+	.navbarcontent {
+		display: flex;
+		align-items: center;
+		gap: 200px;
+		.nav_left {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 20px;
+			img {
+				width: auto;
+				height: 3rem;
+			}
+			input[type="number"] {
+				width: 300px;
+				height: 35px;
+				text-indent: 17px;
+			}
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+		}
+		.nav_right {
+			a {
+				color: white;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+				text-underline-offset: 0.5rem;
+				text-decoration-color: #f25b2d;
+			}
+			ul {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 1.5rem;
+				list-style: none;
+			}
+		}
+	}
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: calc(100vh - 221px);
+}
+.recents {
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #1e2023;
+	.recentcities {
+		padding: 0px 5px;
+		position: relative;
+		width: 700px;
+		white-space: nowrap;
+		p {
+			position: absolute;
+			font-size: 11px;
+			bottom: 20px;
+			left: 10px;
+			color: #f25b2d;
+		}
+		a,
+		ul,
+		li {
+			height: 31px;
+			line-height: 35px;
+		}
+		a {
+			text-decoration: none;
+			color: white;
+		}
+		ul {
+			display: flex;
+		}
+		li {
+			font-size: 12px;
+			list-style: none;
+			padding: 0 5px;
+		}
+		li:hover {
+			background-color: #f25b2d;
+		}
+	}
+}
